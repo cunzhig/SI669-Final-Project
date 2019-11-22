@@ -1,6 +1,7 @@
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import {LoginScreen} from './Login'
 import { HomeScreen } from './Home';
 import {CandidateScreen} from './candidateDetail'
 import { NewsScreen } from './News';
@@ -8,11 +9,13 @@ import { DiscussionScreen } from './Discussion';
 
 const HomeStack = createStackNavigator(
   {
+    Login: LoginScreen,
     Home: HomeScreen,
     CandidateDetail: CandidateScreen,
+    
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Login',
   }
 );
 
