@@ -15,7 +15,7 @@ const HomeStack = createStackNavigator(
     
   },
   {
-    initialRouteName: 'Login',
+    initialRouteName: 'Home',
   }
 );
 
