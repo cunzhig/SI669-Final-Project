@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { Card, WingBlank } from '@ant-design/react-native';
 import {styles} from './Styles'
 
-export class NewsScreen extends React.Component {
+export class PollScreen extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -22,7 +22,7 @@ export class NewsScreen extends React.Component {
      return (
         <View style={styles.container}>
             <View style={styles.headContainer}>
-                <Text style={styles.headText}>News</Text>
+                <Text style={styles.headText}>Poll</Text>
             </View>
             <View style={styles.bodyContainer}>
                 <FlatList

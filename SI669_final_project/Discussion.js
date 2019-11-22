@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { Card, WingBlank, Button } from '@ant-design/react-native';
+import {styles} from './Styles'
 
 export class DiscussionScreen extends React.Component {
     constructor(props){
@@ -12,7 +13,7 @@ export class DiscussionScreen extends React.Component {
                 {key:'2',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0},
                 {key:'3',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0},
               ],
-        }        
+        }
      }
 
      handleUp(item){
@@ -52,19 +53,19 @@ export class DiscussionScreen extends React.Component {
 
      render(){
      return (
-        <View>
-            <View style={{height: 50}}>
-                <Text style={{ textAlign:"center" , fontSize: 40}}>Discussion</Text>
+        <View style={styles.container}>
+            <View style={styles.headContainer}>
+                <Text style={styles.headText}>Discussion</Text>
             </View>
-            <View>
+            <View style={styles.bodyContainer}>
                 <FlatList
                     data = {this.state.discussionList}
                     renderItem = {
                     ({item}) => {
                         return(
-                            
+
                             <WingBlank size="lg">
-                                <TouchableOpacity 
+                                <TouchableOpacity
                         activeOpacity={0.5}
                         onPress ={()=>{this.handleView(item)}}
                         >
@@ -84,10 +85,10 @@ export class DiscussionScreen extends React.Component {
                                 </Card>
                                 </TouchableOpacity>
                                 <View style={{ display: "flex", flexDirection: "row"}}>
-                                        
+
                                         <Button type="ghost" size="small" style={{width: 50}} onPress ={()=>{this.handleUp(item)}}>up</Button>
                                         <Text style={{ flex: 1}}>{item.up}</Text>
-                                        
+
                                         <Button type="ghost" size="small" style={{width: 50}} onPress ={()=>{this.handleDown(item)}}>down</Button>
                                         <Text style={{ flex: 1}}>{item.down}</Text>
                                 </View>

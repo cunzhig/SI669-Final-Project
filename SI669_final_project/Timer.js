@@ -3,11 +3,10 @@ import { View } from 'react-native';
 import CountDown from 'react-native-countdown-component';
 import moment from 'moment';
 
- 
+
 export class Timer extends React.Component {
   constructor(props) {
     super(props);
-    //initialize the counter duration
     this.state = {
       totalDuration: 0,
     };
@@ -30,11 +29,11 @@ export class Timer extends React.Component {
     return (
       <View style={{ flex: 1, justifyContent: 'center' }}>
         <CountDown
+          digitStyle={{backgroundColor: 'skyblue'}}
           until={this.state.totalDuration}
           timetoShow={('H', 'M', 'S')}
           onFinish={() => alert('finished')}
-          onPress={() => alert('hello')}
-          size={20}
+          size={26}
         />
       </View>
     );

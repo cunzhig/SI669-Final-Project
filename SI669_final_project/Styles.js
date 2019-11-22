@@ -2,61 +2,71 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1.0,
-        justifyContent: 'flex-start',
-        alignItems: 'center'
+        flex: 1.0
+    },
+    headContainer: {
+      flex:0.1,
+      alignItems: 'center',
+      justifyContent: 'flex-end'
+    },
+    headText: {
+      textAlign:"center" ,
+      fontSize: 32
     },
     timerContainer:{
-        flex:0.2,
-        justifyContent: 'flex-end'
+        flex:0.3,
+        flexDirection: 'column',
+        justifyContent: 'center'
+    },
+    SectionLine: {
+        backgroundColor: 'grey',
+        width: '90%',
+        height: 1,
+        justifyContent: 'center'
     },
     candidatesContainer: {
-        flex: 0.2,
-        padding: 10,
-        width: '100%',
-        justifyContent: 'flex-start',
+        flex: 0.25,
         flexDirection: 'column',
-        backgroundColor:'grey',
-        alignContent:'center'
+        justifyContent: 'center',
+        width: '100%',
+        alignItems: 'center'
     },
     candidateStyle: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        borderWidth: 0.5,
-        borderColor: '#fff',
-        backgroundColor:'pink',
+        alignItems:'center',
         height: 80,
         width: 80,
-        borderRadius: 5,
         margin: 5,
         padding:5
     },
     ImageIconStyle: {
-        padding:10,
-        height: 50,
-        width: 50,
+        padding:5,
+        height: 60,
+        width: 60,
+        borderWidth: 0.5,
+        borderRadius: 5,
         resizeMode: 'stretch',
     },
-    TextStyle: {
-        color: '#fff',
-        marginBottom: 4,
-        marginRight: 20,
+    iconTextStyle: {
+        color: '#000',
+        textAlign:"center",
+        fontSize: 12
     },
-    SeparatorLine: {
-        backgroundColor: '#fff',
-        width: 70,
-        height: 1,
-    },
-    topnewsContainer: {
-        flex: 0.3,
-        justifyContent: 'flex-end',
-        backgroundColor:'pink',
+    sectionContainer: {
+        width: '90%',
+        flex: 0.2,
+        margin: 5,
         width:'100%'
     },
-    topdisContainer: {
-        flex: 0.3,
-        justifyContent: 'flex-end',
-        backgroundColor: 'lightblue',
-        width:'100%'
+    sectionTitle: {
+      marginLeft: 20,
+      textAlign: "left",
+      fontSize: 20
     },
+    sectionContent: {
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    bodyContainer: {
+      flex: 0.8
+    }
 });
