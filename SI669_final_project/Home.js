@@ -2,7 +2,7 @@
 import React from 'react';
 import {styles} from './Styles'
 import {Timer} from './Timer'
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { Linking } from 'expo';
 import { CheckBox} from 'react-native-elements';
 import { Card, WingBlank, Button } from '@ant-design/react-native';
@@ -34,11 +34,11 @@ export class HomeScreen extends React.Component {
         {key:'3',type:"Discussion", tag:"Harris",content:"My whole family supports Harris", up:0, down:0,isSelected:false},
       ],
       newsList: [
-        {key:'0',type:"News", tag:"Biden",title:"Why the Less Disruptive Health Care Option Could Be Plenty Disruptive", reporter:"Margot Sanger-Katz", img:require('./images/news_biden_2.jpg'),url:"https://www.nytimes.com/2019/12/03/upshot/public-option-medicare-for-all.html"},
-        {key:'1',type:"News", tag:"Trump",title:"200,000 People Without Insurance May Apply for Free H.I.V.-Prevention Drugs", reporter:"Donald G. McNeil Jr.", img:require('./images/news_trump_1.jpg'),url:"https://www.nytimes.com/2019/12/03/health/truvada-prep-hiv-gilead.html"},
-        {key:'2',type:"News", tag:"Yang",title:"Andrew Yang: Yes, Robots Are Stealing Your Job", reporter:"Andrew Yang", img:require('./images/news_yang_1.jpg'),url:"https://www.nytimes.com/2019/11/14/opinion/andrew-yang-jobs.html"},
-        {key:'3',type:"News", tag:"Harris",title:"Kamala Harris Drops Out of 2020 Presidential Race", reporter:"ASTEAD W. HERNDON", img:require('./images/news_harris_1.jpg'),url:"https://www.nytimes.com/2019/12/03/us/politics/kamala-harris-campaign-drops-out.html"},
-        {key:'4',type:"News", tag:"Harris",title:"Why Joe Biden Resonates With Blue-Collar Voters", reporter:"Hilary Swift for The New York Times", img:require('./images/news_biden_1.jpg')},
+        {key:'0',type:"News", tag:"Biden",title:"Why the Less Disruptive Health Care Option Could Be Plenty Disruptive", reporter:"Margot Sanger-Katz", img:require('./images/news_biden_2.jpg'),url:"https://www.nytimes.com/2019/12/03/upshot/public-option-medicare-for-all.html",isSelected:false},
+        {key:'1',type:"News", tag:"Trump",title:"200,000 People Without Insurance May Apply for Free H.I.V.-Prevention Drugs", reporter:"Donald G. McNeil Jr.", img:require('./images/news_trump_1.jpg'),url:"https://www.nytimes.com/2019/12/03/health/truvada-prep-hiv-gilead.html",isSelected:false},
+        {key:'2',type:"News", tag:"Yang",title:"Andrew Yang: Yes, Robots Are Stealing Your Job", reporter:"Andrew Yang", img:require('./images/news_yang_1.jpg'),url:"https://www.nytimes.com/2019/11/14/opinion/andrew-yang-jobs.html",isSelected:false},
+        {key:'3',type:"News", tag:"Harris",title:"Kamala Harris Drops Out of 2020 Presidential Race", reporter:"ASTEAD W. HERNDON", img:require('./images/news_harris_1.jpg'),url:"https://www.nytimes.com/2019/12/03/us/politics/kamala-harris-campaign-drops-out.html",isSelected:false},
+        {key:'4',type:"News", tag:"Harris",title:"Why Joe Biden Resonates With Blue-Collar Voters", reporter:"Hilary Swift for The New York Times", img:require('./images/news_biden_1.jpg'),isSelected:false},
 
       ]
     };
@@ -68,17 +68,31 @@ export class HomeScreen extends React.Component {
     }
     newDiscussion.push(d);
   }
+
+  let newNews = [];
+  for (n of this.state.newsList){
+    if (n.tag == candidate.key){
+      n.isSelected = !n.isSelected;
+    }
+    newNews.push(n);
+  }
+
+
   this.setState({
     candidates:newCandidates,
     discussionList:newDiscussion,
+    newsList:newNews,
   });
+
+  
+  
  }
 
 
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.headContainer}>
             <Text style={styles.headText}>2020 Election</Text>
         </View>
@@ -131,7 +145,8 @@ export class HomeScreen extends React.Component {
                   renderItem = {
                   ({item}) => {
                     return(
-                      <TouchableOpacity
+                      <View>
+                          {item.isSelected ?   <TouchableOpacity
                         activeOpacity={0.5}
                         onPress ={()=>{this.handleView(item)}} >
                         <WingBlank size="lg">
@@ -152,7 +167,10 @@ export class HomeScreen extends React.Component {
                             </Card.Body>
                             </Card>
                           </WingBlank>
-                        </TouchableOpacity>
+                        </TouchableOpacity> : null}
+                      </View>
+                      
+                    
                       );
                       }
                     }
@@ -208,7 +226,7 @@ export class HomeScreen extends React.Component {
         </View>
 
         </View>
-        </View>
+        </ScrollView>
     );
   }
 }
