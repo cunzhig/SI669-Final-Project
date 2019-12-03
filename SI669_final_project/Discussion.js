@@ -2,16 +2,19 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { Card, WingBlank, Button } from '@ant-design/react-native';
 import {styles} from './Styles'
+import { Ionicons } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 
 export class DiscussionScreen extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             discussionList:[
-                {key:'0',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0},
-                {key:'1',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0},
-                {key:'2',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0},
-                {key:'3',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0},
+                {key:'0',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam" },
+                {key:'1',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam" },
+                {key:'2',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam" },
+                {key:'3',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam" },
               ],
         }
      }
@@ -63,33 +66,37 @@ export class DiscussionScreen extends React.Component {
                     renderItem = {
                     ({item}) => {
                         return(
-
                             <WingBlank size="lg">
                                 <TouchableOpacity
-                        activeOpacity={0.5}
-                        onPress ={()=>{this.handleView(item)}}
-                        >
-                                <Card full>
+                                activeOpacity={0.5}
+                                onPress ={()=>{this.handleView(item)}}>
+                                <Card full
+                                style={ {marginTop: 20, marginBottom: 5} }>
                                 <Card.Header
-                                    title={item.tag}
+                                    title={item.name}
                                     thumbStyle={{ width: 30, height: 30 }}
                                     thumb= "https://static01.nyt.com/newsgraphics/2019/10/24/2020-landing-page/96aa0cc35f2fd3a9358817a7350bc6eedaa9d956/headshots/yang.png"
-                                    extra={item.type}
+                                    extra={item.tag}
                                 />
                                 <Card.Body>
                                     <View style={{ height: 42 , display: "flex", flexDirection: "column"}}>
                                     <Text style={{ marginLeft: 16 , flex: 4}}>{item.content}</Text>
                                     </View>
                                 </Card.Body>
-                                <Card.Footer content="Sam"/>
                                 </Card>
                                 </TouchableOpacity>
-                                <View style={{ display: "flex", flexDirection: "row"}}>
-
-                                        <Button type="ghost" size="small" style={{width: 50}} onPress ={()=>{this.handleUp(item)}}>up</Button>
+                                <View style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'flex-end'}}>
+                                        <TouchableOpacity
+                                          style={styles.updownButton}
+                                          onPress={()=>{this.handleUp(item)}} >
+                                        <FontAwesomeIcon icon={ faThumbsUp } size={15} color='skyblue'/>
+                                        </TouchableOpacity>
                                         <Text style={{ flex: 1}}>{item.up}</Text>
-
-                                        <Button type="ghost" size="small" style={{width: 50}} onPress ={()=>{this.handleDown(item)}}>down</Button>
+                                        <TouchableOpacity
+                                          style={styles.updownButton}
+                                          onPress={()=>{this.handleDown(item)}} >
+                                        <FontAwesomeIcon icon={ faThumbsDown } size={15} color='skyblue'/>
+                                        </TouchableOpacity>
                                         <Text style={{ flex: 1}}>{item.down}</Text>
                                 </View>
                             </WingBlank>
