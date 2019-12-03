@@ -5,7 +5,7 @@ import { LoginScreen } from './Login'
 import { HomeScreen } from './Home';
 import { CandidateScreen } from './candidateDetail'
 import { NewsScreen } from './News';
-import { PollScreen } from './PollScreen';
+import { PollScreen } from './Poll';
 import { DiscussionScreen } from './Discussion';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
@@ -15,7 +15,6 @@ const HomeStack = createStackNavigator(
     Login: LoginScreen,
     Home: HomeScreen,
     CandidateDetail: CandidateScreen,
-
   },
   {
     initialRouteName: 'Home',
