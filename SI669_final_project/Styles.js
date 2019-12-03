@@ -73,4 +73,14 @@ export const styles = StyleSheet.create({
       padding: 1,
       margin: 1
     },
+    updownButton: {
+      borderWidth: 1,
+      borderRadius: 3,
+      width: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderColor: 'skyblue',
+      marginRight: 10,
+      padding: 2,
+    },
 });
