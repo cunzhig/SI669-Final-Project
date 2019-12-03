@@ -73,4 +73,17 @@ export const styles = StyleSheet.create({
       padding: 1,
       margin: 1
     },
+    //
+    wrapperCollapsibleList: {
+      flex: 1,
+      marginTop: 20,
+      overflow: "hidden",
+      backgroundColor: "#FFF",
+      borderRadius: 5
+    },
+    collapsibleItem: {
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      borderColor: "#CCC",
+      padding: 10
+    }
 });
