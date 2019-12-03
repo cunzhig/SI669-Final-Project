@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     candidatesContainer: {
-        flex: 0.25,
+        flex: 0.3,
         flexDirection: 'column',
         justifyContent: 'center',
         width: '100%',
@@ -68,5 +68,9 @@ export const styles = StyleSheet.create({
     },
     bodyContainer: {
       flex: 0.8
-    }
+    },
+    labelSelectCheckBoxContainer: {
+      padding: 1,
+      margin: 1
+    },
 });
