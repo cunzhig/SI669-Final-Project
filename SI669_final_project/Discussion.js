@@ -11,10 +11,10 @@ export class DiscussionScreen extends React.Component {
         super(props);
         this.state = {
             discussionList:[
-                {key:'0',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam" },
-                {key:'1',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam" },
-                {key:'2',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam" },
-                {key:'3',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam" },
+                {key:'0',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam", img:require('./images/yang.jpg') },
+                {key:'1',tag:"Biden",content:"My whole family supports Biden ", up:0, down:0, name: "Marry", img:require('./images/biden.png') },
+                {key:'2',tag:"Trump",content:"My whole family supports Trump", up:0, down:0, name: "Ben", img:require('./images/trump.jpeg') },
+                {key:'3',tag:"Harris",content:"My whole family supports Harris", up:0, down:0, name: "Amy", img:require('./images/trump.jpeg') },
               ],
         }
      }
@@ -89,13 +89,13 @@ export class DiscussionScreen extends React.Component {
                                         <TouchableOpacity
                                           style={styles.updownButton}
                                           onPress={()=>{this.handleUp(item)}} >
-                                        <FontAwesomeIcon icon={ faThumbsUp } size={15} color='skyblue'/>
+                                        <FontAwesomeIcon icon={ faThumbsUp } size={15} color='lightblue'/>
                                         </TouchableOpacity>
                                         <Text style={{ flex: 1}}>{item.up}</Text>
                                         <TouchableOpacity
                                           style={styles.updownButton}
                                           onPress={()=>{this.handleDown(item)}} >
-                                        <FontAwesomeIcon icon={ faThumbsDown } size={15} color='skyblue'/>
+                                        <FontAwesomeIcon icon={ faThumbsDown } size={15} color='lightblue'/>
                                         </TouchableOpacity>
                                         <Text style={{ flex: 1}}>{item.down}</Text>
                                 </View>

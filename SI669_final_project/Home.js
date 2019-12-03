@@ -6,7 +6,6 @@ import { View, Text, Image, TouchableOpacity, FlatList, ScrollView } from 'react
 import { Linking } from 'expo';
 import { CheckBox} from 'react-native-elements';
 import { Card, WingBlank, Button } from '@ant-design/react-native';
-import CollapsibleList from "react-native-collapsible-list";
 
 
 
@@ -42,8 +41,8 @@ export class HomeScreen extends React.Component {
 
       ]
     };
-    
- 
+
+
 
  }
 
@@ -84,8 +83,8 @@ export class HomeScreen extends React.Component {
     newsList:newNews,
   });
 
-  
-  
+
+
  }
 
 
@@ -100,7 +99,7 @@ export class HomeScreen extends React.Component {
         <View style={styles.timerContainer}>
           <Timer/>
         </View>
-        <View style = {styles.candidatesContainer}>
+        <View style={styles.candidatesContainer}>
         <View style={styles.SectionLine} />
           <FlatList
             horizontal
@@ -108,7 +107,7 @@ export class HomeScreen extends React.Component {
             renderItem = {
               ({item}) => {
                 return(
-                  <View>
+                  <View style={{alignItems:'center'}}>
                   <TouchableOpacity
                   style={styles.candidateStyle}
                   activeOpacity={0.5}
@@ -124,7 +123,7 @@ export class HomeScreen extends React.Component {
                 containerStyle={styles.labelSelectCheckBoxContainer}
                 checked={item.isSelected}
                 onPress = {()=>{this.handleToggle(item)}}
-                /> 
+                />
                 </View>
 
                 );
@@ -169,8 +168,8 @@ export class HomeScreen extends React.Component {
                           </WingBlank>
                         </TouchableOpacity> : null}
                       </View>
-                      
-                    
+
+
                       );
                       }
                     }
@@ -190,7 +189,7 @@ export class HomeScreen extends React.Component {
               ({item}) => {
                 return(
                   <View>
-                    {item.isSelected == true ? 
+                    {item.isSelected == true ?
                     <WingBlank size="lg">
                     <TouchableOpacity
             activeOpacity={0.5}
@@ -213,9 +212,9 @@ export class HomeScreen extends React.Component {
                     </TouchableOpacity>
                 </WingBlank>
                      : null}
-                  
+
                   </View>
-                  
+
                 );
               }
             }
