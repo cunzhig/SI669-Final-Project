@@ -1,4 +1,4 @@
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { LoginScreen } from './Login'
@@ -7,19 +7,38 @@ import { CandidateScreen } from './candidateDetail'
 import { NewsScreen } from './News';
 import { PollScreen } from './Poll';
 import { DiscussionScreen } from './Discussion';
+import { DiscussionDetailScreen } from './DiscussionDetail';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 
-const HomeStack = createStackNavigator(
+const DiscussionStack = createStackNavigator(
   {
-    Login: LoginScreen,
-    Home: HomeScreen,
-    CandidateDetail: CandidateScreen,
+    Discussion: DiscussionScreen,
+    DiscussionDetail: DiscussionDetailScreen,
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Discussion',
   }
 );
+
+const HomeStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+  },
+);
+
+const PollStack = createStackNavigator(
+  {
+    Poll: PollScreen,
+  },
+);
+
+const NewsStack = createStackNavigator(
+  {
+    News: NewsScreen,
+  },
+);
+
 
 const MainTabs = createBottomTabNavigator({
   Home: {
@@ -33,7 +52,7 @@ const MainTabs = createBottomTabNavigator({
     },
   },
   Poll: {
-    screen: PollScreen,
+    screen: PollStack,
     navigationOptions: {
       tabBarLabel: 'Poll',
       tabBarIcon: ({ focused, tintColor }) => {
@@ -43,7 +62,7 @@ const MainTabs = createBottomTabNavigator({
     },
   },
   News: {
-    screen: NewsScreen,
+    screen: NewsStack,
     navigationOptions: {
       tabBarLabel: 'News',
       tabBarIcon: ({ focused, tintColor }) => {
@@ -53,7 +72,7 @@ const MainTabs = createBottomTabNavigator({
     },
   },
   Discussion: {
-    screen: DiscussionScreen,
+    screen: DiscussionStack,
     navigationOptions: {
       tabBarLabel: 'Discussion',
       tabBarIcon: ({ focused, tintColor }) => {
@@ -64,5 +83,21 @@ const MainTabs = createBottomTabNavigator({
   },
 });
 
-const AppContainer = createAppContainer(MainTabs);
+const AuthStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+  },
+);
+
+const AppSwitch = createSwitchNavigator(
+  {
+    Login: AuthStack,
+    Main: MainTabs,
+  },
+  {
+    initialRouteName: 'Login',
+  }
+);
+
+const AppContainer = createAppContainer(AppSwitch);
 export default AppContainer;

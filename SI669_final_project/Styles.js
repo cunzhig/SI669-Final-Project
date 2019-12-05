@@ -83,4 +83,104 @@ export const styles = StyleSheet.create({
       marginRight: 10,
       padding: 2,
     },
+    footerContainer: {
+      flex: 0.3,
+      flexDirection: 'row',
+      width: '50%',
+      justifyContent: 'center'
+    },
+    detailsBodyContainer: {
+      flex: 0.6,
+      padding: 20, 
+      width: '100%',
+      justifyContent: 'flex-start',
+    },
+    detailsInputContainer: {
+      flex: 0.5
+    },
+    detailsLabelsContainer: {
+      flex: 0.5
+    },
+    headerFunctionContainer: {
+      flexDirection: "row",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center"
+    },
+    bodyContainer: {
+      flex: 0.6,
+      // padding: 40, 
+      width: '100%',
+      justifyContent: 'flex-start',
+    },
+    bodyListItem: {
+      flex: 1,
+      margin: 10,
+      flexDirection: 'row',
+      width: '100%'
+    },
+    bodyListItemLeft: {
+      flex: 0.2,
+      margin: 10,
+      flexDirection: 'row',
+      justifyContent: "flex-start",
+      alignItems: "center"
+    },
+    bodyListItemRight: {
+      flex: 0.8,
+      margin: 10,
+      flexDirection: 'row',
+      justifyContent: "flex-end",
+      alignItems: "center"
+    },
+    bodyListItemDate: {
+      fontSize: 12
+    },
+    bodyListItemText: {
+      fontSize: 18
+    },
+    detailsBodyContainer: {
+      flex: 0.6,
+      padding: 20, 
+      width: '100%',
+      justifyContent: 'flex-start',
+    },
+    detailsInputContainer: {
+      flex: 0.5
+    },
+    detailsLabelsContainer: {
+      flex: 0.5
+    },
+    labelSelectContainer: {
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+    labelSelectCheckBoxContainer: {
+      padding: 1,
+      margin: 1
+    },
+    labelSelectText: {
+      fontSize: 16
+    },
+    mediumButtonContainer: {
+      flex: 0.5,
+      margin: 3,
+    },
+    smallButtonContainer: {
+      flex: 0.3,
+      margin: 3,
+      backgroundColor: "white",
+    },
+    mediumButtonTitle: {
+      fontSize: 14
+    },
+    smallButtonTitle: {
+      fontSize: 12
+    },
+    largeInput: {
+      borderWidth: 1,
+      borderColor: 'black',
+      height: '95%'
+    },
 });

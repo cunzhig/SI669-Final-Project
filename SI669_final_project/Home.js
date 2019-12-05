@@ -6,13 +6,16 @@ import { View, Text, Image, TouchableOpacity, FlatList, ScrollView } from 'react
 import { Linking } from 'expo';
 import { CheckBox} from 'react-native-elements';
 import { Card, WingBlank, Button } from '@ant-design/react-native';
-
-
+import firebase from 'firebase';
+import '@firebase/firestore';
+import {AsyncStorage} from 'react-native';
 
 export class HomeScreen extends React.Component {
 
  constructor(props){
     super(props);
+
+    let user = this.props.navigation.getParam('user', undefined);
 
     this.state ={
       candidates:[
@@ -39,11 +42,14 @@ export class HomeScreen extends React.Component {
         {key:'3',type:"News", tag:"Harris",title:"Kamala Harris Drops Out of 2020 Presidential Race", reporter:"ASTEAD W. HERNDON", img:require('./images/news_harris_1.jpg'),url:"https://www.nytimes.com/2019/12/03/us/politics/kamala-harris-campaign-drops-out.html",isSelected:false},
         {key:'4',type:"News", tag:"Harris",title:"Why Joe Biden Resonates With Blue-Collar Voters", reporter:"Hilary Swift for The New York Times", img:require('./images/news_biden_1.jpg'),isSelected:false},
 
-      ]
+      ],
+      user: user
     };
 
-
-
+    
+    console.log(this.state.user)
+    AsyncStorage.setItem('userKey', user.key)
+    AsyncStorage.setItem('userName', user.username)
  }
 
  handleView(candidateToView){
