@@ -77,14 +77,14 @@ export const styles = StyleSheet.create({
       width: 50,
       justifyContent: 'center',
       alignItems: 'center',
-      borderColor: 'skyblue',
+      borderColor: '#517fa4',
       marginRight: 10,
       padding: 2,
     },
     footerContainer: {
       flex: 0.3,
       flexDirection: 'row',
-      width: '50%',
+      alignContent: 'center',
       justifyContent: 'center',
       alignItems: 'center',
     },
@@ -93,12 +93,6 @@ export const styles = StyleSheet.create({
       padding: 20,
       width: '100%',
       justifyContent: 'flex-start',
-    },
-    detailsInputContainer: {
-      flex: 0.5
-    },
-    detailsLabelsContainer: {
-      flex: 0.5
     },
     headerFunctionContainer: {
       justifyContent: 'flex-start',
@@ -146,6 +140,10 @@ export const styles = StyleSheet.create({
     bodyListItemText: {
       fontSize: 18
     },
+    tagContainer: {
+      flexDirection: 'row',
+      flex: 0.5,
+    },
     detailsBodyContainer: {
       flex: 0.6,
       padding: 20,
@@ -156,7 +154,8 @@ export const styles = StyleSheet.create({
       flex: 0.5
     },
     detailsLabelsContainer: {
-      flex: 0.5
+      marginVertical: 20,
+      flex: 0.3
     },
     labelSelectContainer: {
       flexDirection: 'row',
@@ -171,8 +170,8 @@ export const styles = StyleSheet.create({
       fontSize: 16
     },
     mediumButtonContainer: {
-      flex: 0.5,
-      margin: 3,
+      flex: 0.3,
+      margin: 10,
     },
     smallButtonContainer: {
       flex: 0.3,
@@ -188,6 +187,6 @@ export const styles = StyleSheet.create({
     largeInput: {
       borderWidth: 1,
       borderColor: 'black',
-      height: '95%'
+      height: '95%',
     },
 });

@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, FlatList, Alert, Switch } from 're
 import { Card, WingBlank, Button } from '@ant-design/react-native';
 import { styles } from './Styles'
 import { Ionicons } from '@expo/vector-icons';
-import { Icon } from 'react-native-elements';
+import { Icon, ButtonGroup } from 'react-native-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 import firebase from 'firebase';
@@ -17,6 +17,7 @@ export class DiscussionScreen extends React.Component {
         this.state = {
             isHide: false,
             isSort: false,
+            selectedIndex: 0
         }
 
         AsyncStorage.getItem('userKey', (err, result) => {
@@ -48,7 +49,7 @@ export class DiscussionScreen extends React.Component {
             this.setState({ discussionList: newEntries });
         });
 
-
+        this.updateIndex = this.updateIndex.bind(this)
         this.state = {
             // discussionList:[
             //     {key:'0',tag:"Yang",content:"My whole family supports Yang", up:0, down:0, name: "Sam", img:require('./images/yang.jpg') },
@@ -59,6 +60,10 @@ export class DiscussionScreen extends React.Component {
         }
 
         console.log(this.state.userKey)
+    }
+
+    updateIndex (selectedIndex) {
+      this.setState({selectedIndex})
     }
 
     handleUp(item) {
@@ -209,6 +214,8 @@ export class DiscussionScreen extends React.Component {
 
     render() {
         const root = this;
+        const buttons = ['Time', 'Ups', 'Downs']
+        const selectedIndex = this.state.selectedIndex
         return (
             <View style={styles.container}>
                 <View style={styles.headContainer}>
@@ -238,22 +245,11 @@ export class DiscussionScreen extends React.Component {
                   </View>
                   <View style={styles.headerFunctions}>
                     <Text style={{fontWeight: 'bold'}}>Sort by: </Text>
-                  </View>
-                  <View style={styles.headerFunctions}>
-                    <Text>Create Time </Text>
-                    <Switch style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
-                    onChange = {() => this.handleSwitchSort()}
-                    value = {this.state.isSort}
-                    />
-                    <Text>Ups </Text>
-                    <Switch style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
-                    onChange = {() => this.handleSwitchSort()}
-                    value = {this.state.isSort}
-                    />
-                    <Text>Downs </Text>
-                    <Switch style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
-                    onChange = {() => this.handleSwitchSort()}
-                    value = {this.state.isSort}
+                    <ButtonGroup
+                      onPress={this.updateIndex}
+                      selectedIndex={selectedIndex}
+                      buttons={buttons}
+                      containerStyle={{height: 25, width: 250}}
                     />
                   </View>
                 </View>
@@ -289,22 +285,22 @@ export class DiscussionScreen extends React.Component {
                                                     </Card.Body>
                                                 </Card>
                                             </TouchableOpacity>
-                                            <View style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'flex-end' }}>
+                                            <View style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'flex-start' }}>
                                                 <TouchableOpacity
                                                     style={styles.updownButton}
                                                     onPress={() => { this.handleUp(item) }} >
-                                                    <FontAwesomeIcon icon={faThumbsUp} size={15} color='lightblue' />
+                                                    <FontAwesomeIcon icon={faThumbsUp} size={15} color='#517fa4' />
                                                 </TouchableOpacity>
                                                 <Text style={{ flex: 1 }}>{item.up}</Text>
                                                 <TouchableOpacity
                                                     style={styles.updownButton}
                                                     onPress={() => { this.handleDown(item) }} >
-                                                    <FontAwesomeIcon icon={faThumbsDown} size={15} color='lightblue' />
+                                                    <FontAwesomeIcon icon={faThumbsDown} size={15} color='#517fa4' />
                                                 </TouchableOpacity>
                                                 <Text style={{ flex: 1 }}>{item.down}</Text>
                                                 {
                                                     isAuthor ?
-                                                        <View>
+                                                        <View style={{flexDirection: 'row'}}>
                                                             <Icon
                                                                 reverse
                                                                 name='delete'

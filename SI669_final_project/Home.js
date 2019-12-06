@@ -82,15 +82,11 @@ export class HomeScreen extends React.Component {
     newNews.push(n);
   }
 
-
   this.setState({
     candidates:newCandidates,
     discussionList:newDiscussion,
     newsList:newNews,
   });
-
-
-
  }
 
 
