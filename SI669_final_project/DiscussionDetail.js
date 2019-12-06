@@ -86,7 +86,7 @@ export class DiscussionDetailScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.detailsBodyContainer}>
           <View style={styles.detailsInputContainer}>
-          <Text>Share your thoughts here: </Text>
+          <Text style={{fontSize:16, fontWeight:'bold'}}>Share your thoughts here: </Text>
             <Input
               multiline={true}
               placeholder="Content"
@@ -97,13 +97,13 @@ export class DiscussionDetailScreen extends React.Component {
             />
           </View>
           <View style={styles.detailsLabelsContainer}>
-          <Text>Choose A Tag</Text>
-          <ButtonGroup
-            onPress={this.updateTagIndex}
-            selectedIndex={this.state.tagIndex}
-            buttons={tagButtons}
-            containerStyle={{height: 30}}
-          />
+            <Text style={{fontSize:16, fontWeight:'bold'}}>Choose A Tag</Text>
+            <ButtonGroup
+              onPress={this.updateTagIndex}
+              selectedIndex={this.state.tagIndex}
+              buttons={tagButtons}
+              containerStyle={{height: 30}}
+            />
           </View>
 
         </View>
