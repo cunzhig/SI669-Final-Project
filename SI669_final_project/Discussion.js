@@ -63,6 +63,14 @@ export class DiscussionScreen extends React.Component {
     }
 
     updateIndex (selectedIndex) {
+        let newEntries = this.state.discussionList.slice()
+        if (selectedIndex == 1){
+            newEntries.sort((a,b) => (a.up > b.up) ? -1 : ((a.up < b.up) ? 1 : 0))
+        }
+        if (selectedIndex == 2){
+            newEntries.sort((a,b) => (a.down > b.down) ? -1 : ((a.down < b.down) ? 1 : 0))
+        }
+        this.setState({discussionList:newEntries})
       this.setState({selectedIndex})
     }
 
@@ -213,6 +221,17 @@ export class DiscussionScreen extends React.Component {
         let newEntries = this.state.discussionList.slice()
         this.setState({isHide: !this.state.isHide, discussionList:newEntries})
       }
+    
+    handleSwitchSort() {
+        let newEntries = this.state.discussionList.slice()
+        if (this.state.selectedIndex == 1){
+            newEntries.sort((a,b) => (a.up > b.up) ? -1 : ((a.up < b.up) ? 1 : 0))
+        }
+        if (this.state.selectedIndex == 2){
+            newEntries.sort((a,b) => (a.down > b.down) ? -1 : ((a.down < b.down) ? 1 : 0))
+        }
+        this.setState({discussionList:newEntries})
+    }
 
     render() {
         const root = this;
