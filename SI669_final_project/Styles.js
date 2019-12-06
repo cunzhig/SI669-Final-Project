@@ -90,7 +90,7 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
     },
     detailsBodyContainer: {
-      flex: 0.8,
+      flex: 0.9,
       padding: 20,
       width: '100%',
       justifyContent: 'flex-start',
@@ -145,19 +145,12 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       flex: 0.5,
     },
-    detailsBodyContainer: {
-      flex: 0.6,
-      display: "flex",
-      padding: 20,
-      width: '100%',
-      justifyContent: 'flex-start',
-    },
     detailsInputContainer: {
       flex: 0.4
     },
     detailsLabelsContainer: {
       marginVertical: 10,
-      flex: 0.6
+      flex: 0.7
     },
     labelSelectContainer: {
       flexDirection: 'row',
