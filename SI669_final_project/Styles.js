@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
       fontSize: 32
     },
     timerContainer:{
-        flex:0.3,
+        flex:0.2,
         flexDirection: 'column',
         justifyContent: 'center'
     },
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     candidatesContainer: {
-        flex: 0.4,
+        flex: 0.35,
         flexDirection: 'column',
         justifyContent: 'center',
         width: '100%',
@@ -108,6 +108,11 @@ export const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-start'
+    },
+    homebodyContainer: {
+      flex: 0.6,
+      width: '100%',
+      justifyContent: 'flex-start',
     },
     bodyContainer: {
       flex: 0.8,

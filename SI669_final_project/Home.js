@@ -46,7 +46,7 @@ export class HomeScreen extends React.Component {
       user: user
     };
 
-    
+
     console.log(this.state.user)
     AsyncStorage.setItem('userKey', user.key)
     AsyncStorage.setItem('userName', user.username)
@@ -144,7 +144,7 @@ export class HomeScreen extends React.Component {
           <Text style = {styles.sectionTitle}>Top News</Text>
           <View style = {styles.sectionContent}>
             <View style={styles.SectionLine} /></View>
-            <View style={styles.bodyContainer}>
+            <View>
                 <FlatList
                   data = {this.state.newsList}
                   renderItem = {

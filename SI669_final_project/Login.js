@@ -24,7 +24,7 @@ export class LoginScreen extends React.Component {
     if (firebase.apps.length == 0) {
       firebase.initializeApp(firebaseConfig);
     }
-    const db = firebase.firestore(); 
+    const db = firebase.firestore();
     this.usersRef = db.collection('users');
     this.state = {
       errorMessage: '',
@@ -55,13 +55,13 @@ export class LoginScreen extends React.Component {
     this.usersRef.where('username', '==', username).get().then(queryRef => {
       if (queryRef.empty) {
         let newUser = {
-          username: username, 
+          username: username,
           password: this.state.passwordText
         };
         this.usersRef.add(newUser).then(docRef => {
           newUser.key = docRef.id;
           this.props.navigation.navigate('Home', {mode: 'new', user: newUser});
-          this.setState({      
+          this.setState({
             errorMessage: '',
             usernameText: '',
             passwordText: ''})
@@ -76,10 +76,14 @@ export class LoginScreen extends React.Component {
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text>Welcome!</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold', fontFamily: 'Cochin'}}>2020 Election</Text>
+          <View style={{marginTop: 20}}>
+            <Text>Welcome!</Text>
+          </View>
         </View>
         <View style={styles.bodyContainer}>
           <Text>{this.state.errorMessage}</Text>
+
           <View style={styles.bodyRow}>
             <Text>Username:</Text>
             <Input
@@ -169,7 +173,7 @@ const styles = StyleSheet.create({
     flex: 0.2,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    width: '100%',  
+    width: '100%',
     padding: 30
   },
   bodyContainer: {

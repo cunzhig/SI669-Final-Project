@@ -33,7 +33,7 @@ export class Timer extends React.Component {
           until={this.state.totalDuration}
           timetoShow={('H', 'M', 'S')}
           onFinish={() => alert('finished')}
-          size={26}
+          size={22}
         />
       </View>
     );
