@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1.0
+        flex: 1.0,
+        display: "flex"
     },
     headContainer: {
       flex:0.1,
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
     headText: {
       textAlign:"center" ,
       fontSize: 30,
-      fontFamily: 'Cochin'
+      // fontFamily: 'Cochin'
     },
     timerContainer:{
         flex:0.2,
@@ -82,14 +83,14 @@ export const styles = StyleSheet.create({
       padding: 2,
     },
     footerContainer: {
-      flex: 0.3,
+      flex: 0.1,
       flexDirection: 'row',
       alignContent: 'center',
       justifyContent: 'center',
       alignItems: 'center',
     },
     detailsBodyContainer: {
-      flex: 0.6,
+      flex: 0.8,
       padding: 20,
       width: '100%',
       justifyContent: 'flex-start',
@@ -146,16 +147,17 @@ export const styles = StyleSheet.create({
     },
     detailsBodyContainer: {
       flex: 0.6,
+      display: "flex",
       padding: 20,
       width: '100%',
       justifyContent: 'flex-start',
     },
     detailsInputContainer: {
-      flex: 0.5
+      flex: 0.4
     },
     detailsLabelsContainer: {
-      marginVertical: 20,
-      flex: 0.3
+      marginVertical: 10,
+      flex: 0.6
     },
     labelSelectContainer: {
       flexDirection: 'row',

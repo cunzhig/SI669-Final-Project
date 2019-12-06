@@ -102,7 +102,8 @@ export class DiscussionDetailScreen extends React.Component {
               onPress={this.updateTagIndex}
               selectedIndex={this.state.tagIndex}
               buttons={tagButtons}
-              containerStyle={{height: 30}}
+              containerStyle={{height: 400, display: "flex", flexDirection: "column"}}
+              buttonStyle={{flex: 0.2}}
             />
           </View>
 

@@ -76,7 +76,7 @@ export class LoginScreen extends React.Component {
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <View style={styles.headerContainer}>
-          <Text style={{fontSize: 30, fontWeight: 'bold', fontFamily: 'Cochin'}}>2020 Election</Text>
+          <Text style={{fontSize: 30, fontWeight: 'bold'}}>2020 Election</Text>
           <View style={{marginTop: 20}}>
             <Text>Welcome!</Text>
           </View>

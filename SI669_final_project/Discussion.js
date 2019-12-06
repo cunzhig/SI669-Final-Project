@@ -73,7 +73,7 @@ export class DiscussionScreen extends React.Component {
         this.setState({discussionList:newEntries})
       this.setState({selectedIndex})
     }
-
+                                                                      
     handleUp(item) {
         if (this.state.userKey == item.authorKey) {
             Alert.alert(
