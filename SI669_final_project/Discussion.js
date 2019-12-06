@@ -302,7 +302,7 @@ export class DiscussionScreen extends React.Component {
                                                 <Text style={{ flex: 1 }}>{item.down}</Text>
                                                 {
                                                     isAuthor ?
-                                                        <View>
+                                                        <View style={{flexDirection: 'row'}}>
                                                             <Icon
                                                                 reverse
                                                                 name='delete'

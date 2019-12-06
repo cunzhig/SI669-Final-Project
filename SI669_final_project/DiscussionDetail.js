@@ -13,7 +13,7 @@ export class DiscussionDetailScreen extends React.Component {
     this.discussionScreen = this.props.navigation.getParam('discussionScreen');
 
     this.isAdd = (typeof this.entryToUpdate === 'undefined');
-    
+
     let initContent = '';
     let initTag = 'Bennet';
     let initUp = 0;
@@ -52,7 +52,7 @@ export class DiscussionDetailScreen extends React.Component {
     console.log(this.state)
   }
 
-  
+
 
   handleSave = () => {
     console.log(this.state)
@@ -84,12 +84,9 @@ export class DiscussionDetailScreen extends React.Component {
     const tagButtons = ['Bennet', 'Biden', 'Bloomberg', 'Booker', 'Buttigieg', 'Castro', 'Delaney', 'Gabbard', 'Klobuchar', 'Patrick', 'Sanders', 'Steyer', 'Warren', 'Williamson', 'Yang', 'Trump', 'Walsh', 'Weld']
     return (
       <View style={styles.container}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerText}>Discussion Detail</Text>
-          </View>
         <View style={styles.detailsBodyContainer}>
           <View style={styles.detailsInputContainer}>
-          <Text>What you want to say</Text>
+          <Text>Share your thoughts here: </Text>
             <Input
               multiline={true}
               placeholder="Content"
@@ -100,15 +97,15 @@ export class DiscussionDetailScreen extends React.Component {
             />
           </View>
           <View style={styles.detailsLabelsContainer}>
-          <Text>Tag</Text>
+          <Text>Choose A Tag</Text>
           <ButtonGroup
             onPress={this.updateTagIndex}
             selectedIndex={this.state.tagIndex}
             buttons={tagButtons}
             containerStyle={{height: 30}}
-          /> 
+          />
           </View>
-    
+
         </View>
         <View style={styles.footerContainer}>
           <Button

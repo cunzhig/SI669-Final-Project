@@ -97,9 +97,6 @@ export const styles = StyleSheet.create({
     detailsInputContainer: {
       flex: 0.5
     },
-    detailsLabelsContainer: {
-      flex: 0.5
-    },
     headerFunctionContainer: {
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
@@ -145,6 +142,10 @@ export const styles = StyleSheet.create({
     },
     bodyListItemText: {
       fontSize: 18
+    },
+    tagContainer: {
+      flexDirection: 'row',
+      flex: 0.5,
     },
     detailsBodyContainer: {
       flex: 0.6,
