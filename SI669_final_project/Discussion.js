@@ -9,6 +9,7 @@ import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 import firebase from 'firebase';
 import '@firebase/firestore';
 import { AsyncStorage } from 'react-native';
+import  UserAvatar  from 'react-native-user-avatar';
 
 export class DiscussionScreen extends React.Component {
     constructor(props) {
@@ -274,15 +275,16 @@ export class DiscussionScreen extends React.Component {
                                                 onPress={() => { this.handleView(item) }}>
                                                 <Card full
                                                     style={{ marginTop: 20, marginBottom: 5 }}>
-                                                    <Card.Header
+                                                    {/* <Card.Header
                                                         title={item.name}
                                                         thumbStyle={{ width: 30, height: 30 }}
                                                         thumb="https://static01.nyt.com/newsgraphics/2019/10/24/2020-landing-page/96aa0cc35f2fd3a9358817a7350bc6eedaa9d956/headshots/yang.png"
                                                         extra={item.tag}
-                                                    />
+                                                    /> */}
                                                     <Card.Body>
-                                                        <View style={{ height: 42, display: "flex", flexDirection: "column" }}>
-                                                            <Text style={{ marginLeft: 16, flex: 4 }}>{item.content}</Text>
+                                                        <View style={{ height: 42, display: "flex", flexDirection: "row" }}>
+                                                        <UserAvatar size="24" name={item.authorName} />
+                                                            <Text style={{ fontSize: 18, marginLeft: 6, flex: 4, justifyContent: 'center', alignItems: 'center'}}>{item.content}</Text>
                                                         </View>
                                                     </Card.Body>
                                                 </Card>

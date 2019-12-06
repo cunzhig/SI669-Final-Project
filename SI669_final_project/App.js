@@ -1,4 +1,5 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { LoginScreen } from './Login'
@@ -8,6 +9,7 @@ import { NewsScreen } from './News';
 import { PollScreen } from './Poll';
 import { DiscussionScreen } from './Discussion';
 import { DiscussionDetailScreen } from './DiscussionDetail';
+import { SettingScreen } from './Settings'
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 
@@ -89,10 +91,34 @@ const AuthStack = createStackNavigator(
   },
 );
 
+const MainDrawers = createDrawerNavigator(
+  {
+    Main: {
+      navigationOptions: {
+        drawerIcon: ({ tintColor }) => (
+          <Ionicons name="md-home" style={{ color: tintColor }} />
+        ),
+        drawerLabel: "Main"
+      },
+      screen: MainTabs
+    },
+
+    Settings: {
+      navigationOptions: {
+        drawerIcon: ({ tintColor }) => (
+          <Ionicons name="md-settings" style={{ color: tintColor }} />
+        ),
+        drawerLabel: "Settings"
+      },
+      screen: SettingScreen
+    },
+  }
+)
+
 const AppSwitch = createSwitchNavigator(
   {
     Login: AuthStack,
-    Main: MainTabs,
+    Draw: MainDrawers,
   },
   {
     initialRouteName: 'Login',
