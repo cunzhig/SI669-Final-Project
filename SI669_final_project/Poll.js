@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList, Dimensions } from 'react-native';
+import { CheckBox} from 'react-native-elements';
 import { Card, WingBlank } from '@ant-design/react-native';
 import { styles } from './Styles'
 import {
@@ -34,14 +35,14 @@ export class PollScreen extends React.Component {
             ],
             candidates: [
                 { key: 'Yang', lastname: "Yang", education: "", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html", poll: { data: [0, 0, 2, 1, 3, 2, 2, 3, 3, 3] } },
-                // { key: 'Trump', lastname: "Trump", education: "", isSelected: false, img: require('./images/trump.jpeg'), url: "https://www.cnn.com/2013/07/04/us/donald-trump-fast-facts/index.html" },
+                { key: 'Trump', lastname: "Trump", education: "", isSelected: false, img: require('./images/trump.jpeg'), url: "https://www.cnn.com/2013/07/04/us/donald-trump-fast-facts/index.html" },
                 { key: 'Biden', lastname: "Biden", education: "", isSelected: true, img: require('./images/biden.png'), url: "https://www.cnn.com/2013/01/22/us/joe-biden-fast-facts/index.html", poll: { data: [29, 33, 36, 38, 34, 32, 33, 32, 32, 32] } },
                 { key: 'Harris', lastname: "Harris", education: "", isSelected: true, img: require('./images/harris.jpg'), url: "https://www.cnn.com/2019/01/28/us/kamala-harris-fast-facts/index.html", poll: { data: [10, 8, 7, 7, 10, 13, 8, 6, 6, 5] } },
-                // { key: 'f', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
-                // { key: 'g', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
-                // { key: 'h', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
-                // { key: 'i', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
-                // { key: 'j', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
+                { key: 'f', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
+                { key: 'g', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
+                { key: 'h', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
+                { key: 'i', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
+                { key: 'j', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
             ],
         }
 
@@ -96,35 +97,35 @@ export class PollScreen extends React.Component {
                 population: 21500000,
                 color: 'rgba(131, 167, 234, 1)',
                 legendFontColor: '#7F7F7F',
-                legendFontSize: 15,
+                legendFontSize: 10,
             },
             {
                 name: 'Toronto',
                 population: 2800000,
                 color: '#F00',
                 legendFontColor: '#7F7F7F',
-                legendFontSize: 15,
+                legendFontSize: 10,
             },
             {
                 name: 'Beijing',
                 population: 527612,
                 color: 'red',
                 legendFontColor: '#7F7F7F',
-                legendFontSize: 15,
+                legendFontSize: 10,
             },
             {
                 name: 'New York',
                 population: 8538000,
                 color: '#ffffff',
                 legendFontColor: '#7F7F7F',
-                legendFontSize: 15,
+                legendFontSize: 10,
             },
             {
                 name: 'Moscow',
                 population: 11920000,
                 color: 'rgb(0, 0, 255)',
                 legendFontColor: '#7F7F7F',
-                legendFontSize: 15,
+                legendFontSize: 10,
             },
         ];
 
@@ -135,6 +136,37 @@ export class PollScreen extends React.Component {
                     <Text style={styles.headText}>Poll</Text>
                 </View>
                 <View style={styles.bodyContainer}>
+                  <View style={styles.candidatesContainer}>
+                  <View style={styles.SectionLine} />
+                    <FlatList
+                      horizontal
+                      data = {this.state.candidates}
+                      renderItem = {
+                        ({item}) => {
+                          return(
+                            <View style={{alignItems:'center'}}>
+                            <TouchableOpacity
+                            style={styles.candidateStyle}
+                            activeOpacity={0.5}
+                            >
+                              <Image
+                                source= {item.img}
+                                style={styles.ImageIconStyle}
+                              />
+                              <Text style={styles.iconTextStyle}> {item.lastname}</Text>
+                          </TouchableOpacity>
+                          <CheckBox
+                          containerStyle={styles.labelSelectCheckBoxContainer}
+                          checked={item.isSelected}
+                          />
+                          </View>
+                          );
+                        }
+                      }
+                    >
+                    </FlatList>
+                  </View>
+                  <View style={{flex: 0.7}}>
                     <FlatList
                         data={this.state.candidates}
                         renderItem={
@@ -145,13 +177,13 @@ export class PollScreen extends React.Component {
                                 };
                                 return (
                                     <View>
-                                    {item.isSelected ? 
+                                    {item.isSelected ?
                                     <View>
                             <Text>{item.lastname}</Text>
                                     <LineChart
                                         data={pollData}
                                         width={Dimensions.get('window').width} // from react-native
-                                        height={250}
+                                        height={200}
                                         yAxisSuffix={'%'}
                                         chartConfig={{
                                             backgroundColor: '#e26a00',
@@ -179,31 +211,8 @@ export class PollScreen extends React.Component {
                         }
                     >
                     </FlatList>
-                </View>
-                <View>
-                    <Text>
-                        Top5 democratic presidential candidates polling
-  </Text>
-                    <PieChart
-                        data={pieData}
-                        width={Dimensions.get('window').width}
-                        height={220}
-                        chartConfig={{
-                            backgroundColor: '#e26a00',
-                            backgroundGradientFrom: '#fb8c00',
-                            backgroundGradientTo: '#ffa726',
-                            decimalPlaces: 2, // optional, defaults to 2dp
-                            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                            style: {
-                                borderRadius: 16
-                            }
-                        }}
-                        accessor="population"
-                        backgroundColor="transparent"
-                        paddingLeft="15"
-                        absolute
-                    />
-                </View>
+                  </View>
+              </View>
             </View>
         );
     }

@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     candidatesContainer: {
-        flex: 0.3,
+        flex: 0.4,
         flexDirection: 'column',
         justifyContent: 'center',
         width: '100%',
@@ -66,9 +66,6 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center'
     },
-    bodyContainer: {
-      flex: 0.8
-    },
     labelSelectCheckBoxContainer: {
       padding: 1,
       margin: 1
@@ -87,11 +84,12 @@ export const styles = StyleSheet.create({
       flex: 0.3,
       flexDirection: 'row',
       width: '50%',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     detailsBodyContainer: {
       flex: 0.6,
-      padding: 20, 
+      padding: 20,
       width: '100%',
       justifyContent: 'flex-start',
     },
@@ -102,14 +100,17 @@ export const styles = StyleSheet.create({
       flex: 0.5
     },
     headerFunctionContainer: {
-      flexDirection: "row",
-      justifyContent: "center",
-      alignContent: "center",
-      alignItems: "center"
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
+      paddingHorizontal: 20,
+    },
+    headerFunctions: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start'
     },
     bodyContainer: {
-      flex: 0.6,
-      // padding: 40, 
+      flex: 0.8,
       width: '100%',
       justifyContent: 'flex-start',
     },
@@ -141,7 +142,7 @@ export const styles = StyleSheet.create({
     },
     detailsBodyContainer: {
       flex: 0.6,
-      padding: 20, 
+      padding: 20,
       width: '100%',
       justifyContent: 'flex-start',
     },

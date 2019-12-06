@@ -193,7 +193,7 @@ export class DiscussionScreen extends React.Component {
     handleEdit(entryToEdit) {
         this.props.navigation.navigate('DiscussionDetail', {
             entry: entryToEdit,
-            discussionScreen: this 
+            discussionScreen: this
         });
     }
 
@@ -212,18 +212,49 @@ export class DiscussionScreen extends React.Component {
             <View style={styles.container}>
                 <View style={styles.headContainer}>
                     <Text style={styles.headText}>Discussion</Text>
-                    <View style={styles.headerFunctionContainer}>
-          <Text>My posts</Text>
-          <Switch
-          onChange = {() => this.handleSwitchHide()}
-          value = {this.state.isHide}
-          />
-          <Text>Sort</Text>
-          <Switch
-          onChange = {() => this.handleSwitchSort()} 
-          value = {this.state.isSort}
-          />
-          </View>
+                </View>
+                <View style={styles.headerFunctionContainer}>
+                  <View style={styles.headerFunctions}>
+                    <Text style={{fontSize: 16, fontWeight: 'bold'}}>My posts</Text>
+                    <Switch style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
+                    onChange = {() => this.handleSwitchHide()}
+                    value = {this.state.isHide}
+                    />
+
+                    <Text style={{fontSize: 16, fontWeight: 'bold'}}>New post</Text>
+                    <TouchableOpacity
+                    onPress={() => {
+                      this.props.navigation.navigate('DiscussionDetail', { discussionScreen: this });
+                    }}>
+                      <Icon
+                          reverse
+                          name='plus'
+                          type='font-awesome'
+                          color='#517fa4'
+                          size={16}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.headerFunctions}>
+                    <Text style={{fontWeight: 'bold'}}>Sort by: </Text>
+                  </View>
+                  <View style={styles.headerFunctions}>
+                    <Text>Create Time </Text>
+                    <Switch style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
+                    onChange = {() => this.handleSwitchSort()}
+                    value = {this.state.isSort}
+                    />
+                    <Text>Ups </Text>
+                    <Switch style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
+                    onChange = {() => this.handleSwitchSort()}
+                    value = {this.state.isSort}
+                    />
+                    <Text>Downs </Text>
+                    <Switch style={{ transform: [{ scaleX: 0.7 }, { scaleY: 0.7 }] }}
+                    onChange = {() => this.handleSwitchSort()}
+                    value = {this.state.isSort}
+                    />
+                  </View>
                 </View>
                 <View style={styles.bodyContainer}>
                     <FlatList
@@ -236,7 +267,7 @@ export class DiscussionScreen extends React.Component {
                                     <View>
                                         {
                                             root.state.isHide && !isAuthor ? null
-                                            : 
+                                            :
                                             <WingBlank size="lg">
                                             <TouchableOpacity
                                                 activeOpacity={0.5}
@@ -293,7 +324,7 @@ export class DiscussionScreen extends React.Component {
                                                 }
                                             </View>
                                             <View>
-    
+
                                             </View>
                                         </WingBlank>
                                         }
@@ -303,18 +334,6 @@ export class DiscussionScreen extends React.Component {
                         }
                     >
                     </FlatList>
-                </View>
-                <View style={styles.footerContainer}>
-                    <Icon
-                        reverse
-                        name='plus'
-                        type='font-awesome'
-                        color='#517fa4'
-                        size={30}
-                        onPress={() => {
-                            this.props.navigation.navigate('DiscussionDetail', { discussionScreen: this });
-                        }}
-                    />
                 </View>
             </View>
         );
