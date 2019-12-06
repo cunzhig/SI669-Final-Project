@@ -172,10 +172,12 @@ export class DiscussionScreen extends React.Component {
 
     updateEntry(entryToUpdate) {
         this.entriesRef.doc(entryToUpdate.key).set({
-            tag: entryToUpdate.tag,
+        tag: entryToUpdate.tag,
         content: entryToUpdate.content,
         up: entryToUpdate.up,
         down: entryToUpdate.down,
+        authorKey: entryToUpdate.authorKey,
+        authorName: entryToUpdate.authorName,
         }).then(() => {
             let newEntries = [];
             for (entry of this.state.discussionList) {

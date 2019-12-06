@@ -58,7 +58,7 @@ export class DiscussionDetailScreen extends React.Component {
     console.log(this.state)
     let tagButtons = ['Bennet', 'Biden', 'Bloomberg', 'Booker', 'Buttigieg', 'Castro', 'Delaney', 'Gabbard', 'Klobuchar', 'Patrick', 'Sanders', 'Steyer', 'Warren', 'Williamson', 'Yang', 'Trump', 'Walsh', 'Weld']
     let newEntry = {
-        tag: this.state.tag,
+        tag: tagButtons[this.state.tagIndex],
         content: this.state.content,
         up: this.state.up,
         down: this.state.down,
