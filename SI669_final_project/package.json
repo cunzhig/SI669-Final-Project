@@ -40,6 +40,7 @@
     "react-navigation-drawer": "^2.3.3",
     "react-navigation-stack": "^1.10.3",
     "react-navigation-tabs": "^2.6.0",
+    "react-tag-cloud": "^1.3.2",
     "react-user-avatar": "^1.10.0"
   },
   "devDependencies": {
