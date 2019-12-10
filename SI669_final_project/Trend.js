@@ -1,7 +1,7 @@
 import React from 'react';
 import { Searchbar } from 'react-native-paper';
 import { View, Text, Image, TouchableOpacity, FlatList, ScrollView } from 'react-native';
-import { TagCloud } from 'react-tagcloud'
+// import TagCloud from 'react-tag-cloud';
 // import randomColor from 'randomcolor';
 
 export class TrendScreen extends React.Component{
