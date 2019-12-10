@@ -9,6 +9,7 @@ import { NewsScreen } from './News';
 import { PollScreen } from './Poll';
 import { DiscussionScreen } from './Discussion';
 import { DiscussionDetailScreen } from './DiscussionDetail';
+import {TrendScreen} from './Trend'
 import { SettingScreen } from './Settings'
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
@@ -38,6 +39,12 @@ const PollStack = createStackNavigator(
 const NewsStack = createStackNavigator(
   {
     News: NewsScreen,
+  },
+);
+
+const TrendStack = createStackNavigator(
+  {
+    Trend: TrendScreen,
   },
 );
 
@@ -77,6 +84,16 @@ const MainTabs = createBottomTabNavigator({
     screen: DiscussionStack,
     navigationOptions: {
       tabBarLabel: 'Discussion',
+      tabBarIcon: ({ focused, tintColor }) => {
+        const iconName = `ios-chatboxes`;
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    },
+  },
+  Trend: {
+    screen: TrendStack,
+    navigationOptions: {
+      tabBarLabel: 'Trend',
       tabBarIcon: ({ focused, tintColor }) => {
         const iconName = `ios-chatboxes`;
         return <Ionicons name={iconName} size={25} color={tintColor} />;
