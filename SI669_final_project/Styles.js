@@ -184,4 +184,10 @@ export const styles = StyleSheet.create({
       borderColor: 'black',
       height: '95%',
     },
+    cloudContainer:{
+      // backgroundColor:'pink',
+      justifyContent:'center',
+      alignContent:'center',
+      height:'100%'
+    },
 });
