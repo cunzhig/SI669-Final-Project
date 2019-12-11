@@ -3,27 +3,41 @@ import { Searchbar } from 'react-native-paper';
 import { View, Text, Image, TouchableOpacity, FlatList, ScrollView, Alert } from 'react-native';
 import Cloud from 'react-native-word-cloud';
 import randomColor from 'randomcolor';
+import {styles} from './Styles'
 
 export class KeywordScreen extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             search:'',
-            result:'',
+            keywordsArray:[],
         };
+        //
+        this.response = [{'word': 'yorkers discriminate new', 'weight': '166'}, {'word': 'ny don jr', 'weight': '104'}, {'word': 'good riddance trump', 'weight': '56'}, {'word': 'john eisenberg transcript', 'weight': '71'}, {'word': 'iowa tonight evolving', 'weight': '69'}, {'word': 'lets fight donald', 'weight': '83'}, {'word': 'odd beer beats', 'weight': '105'}, {'word': 'force tonight florescent', 'weight': '46'}];
     }
 
     updateSearch = search => {
         this.setState({ search:search });
-    }; 
+    };
 
     updateResult= search =>{
-        this.setState({ result:"result" });
+        keywords  = []
+        for (term of this.response){
+            keywords.push({
+                keyword:term['word'],
+                frequency:Number(term['weight'])*200,
+                color:'rgba(0,0,0,0)'
+            })
+        }
+        // console.log(keywords)
+        this.setState({ keywordsArray:keywords });
+        console.log(this.state.keywordsArray)
+
     };
 
 
     handlePress = async () => {
-        fetch('http://10.0.0.144:5000/rn/', {
+        fetch('http://10.0.0.178:5000/keyword/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -34,8 +48,22 @@ export class KeywordScreen extends React.Component{
       })
           .then((response) => response.json())
           .then((responseJson) => {
-       Alert.alert("success" + responseJson);
-       this.setState({ result:responseJson });
+    //    Alert.alert("success" + responseJson);
+       // mapping
+       keywords  = []
+        for (term of responseJson){
+            keywords.push({
+                keyword:term['word'],
+                frequency:Number(term['weight']),
+                color:'rgba(0,0,0,0)'
+            })
+        }
+        // console.log(keywords)
+        this.setState({ keywordsArray:keywords });
+        console.log(this.state.keywordsArray)
+
+
+    //    this.setState({ result:responseJson });
           })
           .catch((error) => {
             console.error(error);
@@ -43,7 +71,8 @@ export class KeywordScreen extends React.Component{
       }
 
     render(){
-        const keywordsArray = [    {
+        const keywordsArray = [
+        {
             keyword: "word1",    // the actual keyword
             frequency: 123,      // the frequency of this keyword
             color: randomColor(),     // the color of the circle that shows this keyword
@@ -66,7 +95,7 @@ export class KeywordScreen extends React.Component{
         const { search } = this.state;
         return(
             <View>
-            <Text>Trend</Text>
+                <Text style={styles.headText}>Keywords</Text>
             <Searchbar
                 placeholder="Type Here..."
                 onChangeText={this.updateSearch}
@@ -75,7 +104,7 @@ export class KeywordScreen extends React.Component{
             />
             <Text>{this.state.result}</Text>
 
-    <Cloud keywords={keywordsArray} scale={250} largestAtCenter={true} drawContainerCircle={false}/>
+
             </View>
         );
     }
