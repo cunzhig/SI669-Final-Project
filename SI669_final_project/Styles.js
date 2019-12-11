@@ -13,6 +13,8 @@ export const styles = StyleSheet.create({
     headText: {
       textAlign:"center" ,
       fontSize: 30,
+      marginTop: 10,
+      marginBottom: 10
       // fontFamily: 'Cochin'
     },
     timerContainer:{
