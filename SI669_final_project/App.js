@@ -9,7 +9,8 @@ import { NewsScreen } from './News';
 import { PollScreen } from './Poll';
 import { DiscussionScreen } from './Discussion';
 import { DiscussionDetailScreen } from './DiscussionDetail';
-import {TrendScreen} from './Trend'
+import { KeywordScreen } from './Keyword'
+import { RankScreen } from './Rank'
 import { SettingScreen } from './Settings'
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
@@ -42,9 +43,15 @@ const NewsStack = createStackNavigator(
   },
 );
 
-const TrendStack = createStackNavigator(
+const KeywordStack = createStackNavigator(
   {
-    Trend: TrendScreen,
+    Keyword: KeywordScreen,
+  },
+);
+
+const RankStack = createStackNavigator(
+  {
+    Rank: RankScreen,
   },
 );
 
@@ -90,17 +97,40 @@ const MainTabs = createBottomTabNavigator({
       },
     },
   },
-  Trend: {
-    screen: TrendStack,
+  // Trend: {
+  //   screen: TrendStack,
+  //   navigationOptions: {
+  //     tabBarLabel: 'Trend',
+  //     tabBarIcon: ({ focused, tintColor }) => {
+  //       const iconName = `ios-chatboxes`;
+  //       return <Ionicons name={iconName} size={25} color={tintColor} />;
+  //     },
+  //   },
+  // },
+});
+
+const TrendTabs = createBottomTabNavigator({
+  Keyword: {
+    screen: KeywordStack,
     navigationOptions: {
-      tabBarLabel: 'Trend',
+      tabBarLabel: 'Keyword',
       tabBarIcon: ({ focused, tintColor }) => {
-        const iconName = `ios-chatboxes`;
+        const iconName = `md-flame`;
         return <Ionicons name={iconName} size={25} color={tintColor} />;
       },
     },
   },
-});
+  Rank: {
+    screen: RankScreen,
+    navigationOptions: {
+      tabBarLabel: 'Rank',
+      tabBarIcon: ({ focused, tintColor }) => {
+        const iconName = `md-pulse`;
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+    },
+  },}
+);
 
 const AuthStack = createStackNavigator(
   {
@@ -118,6 +148,16 @@ const MainDrawers = createDrawerNavigator(
         drawerLabel: "Main"
       },
       screen: MainTabs
+    },
+
+    Trend: {
+      navigationOptions: {
+        drawerIcon: ({ tintColor }) => (
+          <Ionicons name="md-trending-up" style={{ color: tintColor }} />
+        ),
+        drawerLabel: "Trend"
+      },
+      screen: TrendTabs
     },
 
     Settings: {
