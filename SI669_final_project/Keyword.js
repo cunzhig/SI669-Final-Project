@@ -25,7 +25,7 @@ export class KeywordScreen extends React.Component{
         for (term of this.response){
             keywords.push({
                 keyword:term['word'],
-                frequency:Number(term['weight']),
+                frequency:Number(term['weight'])*200,
                 color:'rgba(0,0,0,0)'
             })
         }
@@ -117,7 +117,7 @@ export class KeywordScreen extends React.Component{
                 <Text style={{paddingTop: 50, paddingLeft: 50, color: '#FF0000'}}> Click me to see the name </Text>
             </TouchableOpacity> */}
             <View style = {styles.cloudContainer}>
-            <Cloud keywords={this.state.keywordsArray} scale={280} largestAtCenter={true} drawContainerCircle={false}/>
+            <Cloud keywords={this.state.keywordsArray} scale={400} largestAtCenter={true} drawContainerCircle={true}/>
 
             </View>
 

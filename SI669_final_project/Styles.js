@@ -186,7 +186,8 @@ export const styles = StyleSheet.create({
     },
     cloudContainer:{
       // backgroundColor:'pink',
-      justifyContent:'center',
+      // justifyContent:'center',
+      padding:100,
       alignContent:'center',
       height:'100%'
     },
