@@ -121,7 +121,7 @@ const TrendTabs = createBottomTabNavigator({
     },
   },
   Rank: {
-    screen: RankScreen,
+    screen: RankStack,
     navigationOptions: {
       tabBarLabel: 'Rank',
       tabBarIcon: ({ focused, tintColor }) => {

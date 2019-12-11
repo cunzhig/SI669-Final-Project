@@ -23,7 +23,7 @@ export class KeywordScreen extends React.Component{
 
 
     handlePress = async () => {
-        fetch('http://127.0.0.1:5000/rn/', {
+        fetch('http://10.0.0.144:5000/rn/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -74,9 +74,6 @@ export class KeywordScreen extends React.Component{
                 onIconPress={this.handlePress.bind(this)}
             />
             <Text>{this.state.result}</Text>
-            <TouchableOpacity onPress={this.handlePress.bind(this)}>
-     <Text style={{paddingTop: 50, paddingLeft: 50, color: '#FF0000'}}> Click me to see the name </Text>
-    </TouchableOpacity>
 
     <Cloud keywords={keywordsArray} scale={250} largestAtCenter={true} drawContainerCircle={false}/>
             </View>

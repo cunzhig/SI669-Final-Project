@@ -1,15 +1,13 @@
 import React from 'react';
 import { Searchbar } from 'react-native-paper';
 import { View, Text, Image, TouchableOpacity, FlatList, ScrollView, Alert } from 'react-native';
-// import TagCloud from 'react-tag-cloud';
-// import randomColor from 'randomcolor';
 
 export class RankScreen extends React.Component{
     constructor(props){
         super(props)
         this.state = {
             search:'',
-            result:'',
+            rankList:[],
         };
     }
 
@@ -17,13 +15,8 @@ export class RankScreen extends React.Component{
         this.setState({ search:search });
     }; 
 
-    updateResult= search =>{
-        this.setState({ result:"result" });
-    };
-
-
     handlePress = async () => {
-        fetch('http://127.0.0.1:5000/rn/', {
+        fetch('http://127.0.0.1:5000/rank/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -35,7 +28,7 @@ export class RankScreen extends React.Component{
           .then((response) => response.json())
           .then((responseJson) => {
        Alert.alert("success" + responseJson);
-       this.setState({ result:responseJson });
+       this.setState({ rankList:responseJson.res });
           })
           .catch((error) => {
             console.error(error);
@@ -46,17 +39,27 @@ export class RankScreen extends React.Component{
         const { search } = this.state;
         return(
             <View>
-            <Text>Trend</Text>
+            <Text>Rank</Text>
             <Searchbar
                 placeholder="Type Here..."
                 onChangeText={this.updateSearch}
                 value={search}
                 onIconPress={this.handlePress.bind(this)}
             />
-            <Text>{this.state.result}</Text>
-            <TouchableOpacity onPress={this.handlePress.bind(this)}>
-     <Text style={{paddingTop: 50, paddingLeft: 50, color: '#FF0000'}}> Click me to see the name </Text>
-    </TouchableOpacity>
+            <FlatList
+                data = {this.state.rankList}
+                renderItem = {
+                    ({item}) => {
+                      return(
+                        <View style={{alignItems:'center'}}>
+                    <Text>{item}</Text>
+                      </View>
+                      );
+                    }
+                  }
+            >
+
+            </FlatList>
             </View>
         );
     }
