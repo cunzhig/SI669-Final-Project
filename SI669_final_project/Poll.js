@@ -13,14 +13,6 @@ export class PollScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newsList: [
-                { key: '0', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-                { key: '1', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-                { key: '2', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-                { key: '3', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-                { key: '4', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-
-            ],
             pollDataList: [
                 { key: 'Biden', tag: 'Biden', data: { data: [29, 33, 36, 38, 34, 32, 33, 32, 32, 32] } },
                 { key: 'Sanders', tag: 'Sanders', data: { data: [27, 25, 22, 20, 19, 19, 20, 19, 20, 20] } },
@@ -33,16 +25,17 @@ export class PollScreen extends React.Component {
                 { key: '8', tag: 'Gabbard', data: { data: [1, 0, 0, 0, 0, 0, 1, 1, 2, 2] } },
                 { key: '9', tag: 'Steyer', data: { data: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1] } },
             ],
-            candidates: [
-                { key: 'Yang', lastname: "Yang", education: "", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html", poll: { data: [0, 0, 2, 1, 3, 2, 2, 3, 3, 3] } },
-                { key: 'Trump', lastname: "Trump", education: "", isSelected: false, img: require('./images/trump.jpeg'), url: "https://www.cnn.com/2013/07/04/us/donald-trump-fast-facts/index.html" },
-                { key: 'Biden', lastname: "Biden", education: "", isSelected: false, img: require('./images/biden.png'), url: "https://www.cnn.com/2013/01/22/us/joe-biden-fast-facts/index.html", poll: { data: [29, 33, 36, 38, 34, 32, 33, 32, 32, 32] } },
-                { key: 'Harris', lastname: "Harris", education: "", isSelected: false, img: require('./images/harris.jpg'), url: "https://www.cnn.com/2019/01/28/us/kamala-harris-fast-facts/index.html", poll: { data: [10, 8, 7, 7, 10, 13, 8, 6, 6, 5] } },
-                { key: 'f', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
-                { key: 'g', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
-                { key: 'h', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
-                { key: 'i', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
-                { key: 'j', lastname: "Yang", education: "um", isSelected: false, img: require('./images/yang.jpg'), url: "https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html" },
+            candidates:[
+              {key:'Yang',lastname:"Yang",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
+              {key:'Trump',lastname:"Trump",isSelected:false,img:require('./images/trump.jpeg'),url:"https://www.cnn.com/2013/07/04/us/donald-trump-fast-facts/index.html"},
+              {key:'Biden',lastname:"Biden",isSelected:false,img:require('./images/biden.png'),url:"https://www.cnn.com/2013/01/22/us/joe-biden-fast-facts/index.html"},
+              {key:'Harris',lastname:"Harris",isSelected:false,img:require('./images/harris.jpg'),url:"https://www.cnn.com/2019/01/28/us/kamala-harris-fast-facts/index.html"},
+              {key:'Sanders',lastname:"Sanders",isSelected:false,img:require('./images/Sanders.png'),url:"https://www.cnn.com/2015/05/27/us/bernie-sanders-fast-facts/index.html"},
+              {key:'Warren',lastname:"Warren",isSelected:false,img:require('./images/Warren.png'),url:"https://www.cnn.com/2015/01/09/us/elizabeth-warren-fast-facts/index.html"},
+              {key:'Buttigieg',lastname:"Buttigieg",isSelected:false,img:require('./images/Buttigieg.png'),url:"https://www.cnn.com/2019/04/19/us/pete-buttigieg-fast-facts/index.html"},
+              {key:'Booker',lastname:"Booker",isSelected:false,img:require('./images/Booker.png'),url:"https://www.cnn.com/2019/02/14/us/cory-booker-fast-facts/index.html"},
+              {key:'Klobuchar',lastname:"Klobuchar",isSelected:false,img:require('./images/Klobuchar.png'),url:"https://www.cnn.com/2019/02/18/us/amy-klobuchar-fast-facts/index.html"},
+              {key:'Gabbard',lastname:"Gabbard",isSelected:false,img:require('./images/Gabbard.png'),url:"https://www.cnn.com/2019/01/30/us/tulsi-gabbard-fast-facts/index.html"},
             ],
         }
 
