@@ -19,15 +19,16 @@ export class HomeScreen extends React.Component {
 
     this.state ={
       candidates:[
-        {key:'Yang',lastname:"Yang",education:"",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
-        {key:'Trump',lastname:"Trump",education:"",isSelected:false,img:require('./images/trump.jpeg'),url:"https://www.cnn.com/2013/07/04/us/donald-trump-fast-facts/index.html"},
-        {key:'Biden',lastname:"Biden",education:"",isSelected:false,img:require('./images/biden.png'),url:"https://www.cnn.com/2013/01/22/us/joe-biden-fast-facts/index.html"},
-        {key:'Harris',lastname:"Harris",education:"",isSelected:false,img:require('./images/harris.jpg'),url:"https://www.cnn.com/2019/01/28/us/kamala-harris-fast-facts/index.html"},
-        {key:'f',lastname:"Yang",education:"um",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
-        {key:'g',lastname:"Yang",education:"um",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
-        {key:'h',lastname:"Yang",education:"um",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
-        {key:'i',lastname:"Yang",education:"um",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
-        {key:'j',lastname:"Yang",education:"um",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
+        {key:'Yang',lastname:"Yang",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
+        {key:'Trump',lastname:"Trump",isSelected:false,img:require('./images/trump.jpeg'),url:"https://www.cnn.com/2013/07/04/us/donald-trump-fast-facts/index.html"},
+        {key:'Biden',lastname:"Biden",isSelected:false,img:require('./images/biden.png'),url:"https://www.cnn.com/2013/01/22/us/joe-biden-fast-facts/index.html"},
+        {key:'Harris',lastname:"Harris",isSelected:false,img:require('./images/harris.jpg'),url:"https://www.cnn.com/2019/01/28/us/kamala-harris-fast-facts/index.html"},
+        {key:'Sanders',lastname:"Sanders",isSelected:false,img:require('./images/Sanders.png'),url:"https://www.cnn.com/2015/05/27/us/bernie-sanders-fast-facts/index.html"},
+        {key:'Warren',lastname:"Warren",isSelected:false,img:require('./images/Warren.png'),url:"https://www.cnn.com/2015/01/09/us/elizabeth-warren-fast-facts/index.html"},
+        {key:'Buttigieg',lastname:"Buttigieg",isSelected:false,img:require('./images/Buttigieg.png'),url:"https://www.cnn.com/2019/04/19/us/pete-buttigieg-fast-facts/index.html"},
+        {key:'Booker',lastname:"Booker",isSelected:false,img:require('./images/Booker.png'),url:"https://www.cnn.com/2019/02/14/us/cory-booker-fast-facts/index.html"},
+        {key:'Klobuchar',lastname:"Klobuchar",isSelected:false,img:require('./images/Klobuchar.png'),url:"https://www.cnn.com/2019/02/18/us/amy-klobuchar-fast-facts/index.html"},
+        {key:'Gabbard',lastname:"Gabbard",isSelected:false,img:require('./images/Gabbard.png'),url:"https://www.cnn.com/2019/01/30/us/tulsi-gabbard-fast-facts/index.html"},
       ],
       discussionList:[
         {key:'0',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0,isSelected:false},

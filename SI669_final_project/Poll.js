@@ -13,14 +13,6 @@ export class PollScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newsList: [
-                { key: '0', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-                { key: '1', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-                { key: '2', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-                { key: '3', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-                { key: '4', type: "News", tag: "Biden", title: "Why Joe Biden Resonates With Blue-Collar Voters", reporter: "Hilary Swift for The New York Times", img: require('./images/news_biden_1.jpg') },
-
-            ],
             pollDataList: [
                 { key: 'Biden', tag: 'Biden', data: { data: [29, 33, 36, 38, 34, 32, 33, 32, 32, 32] } },
                 { key: 'Sanders', tag: 'Sanders', data: { data: [27, 25, 22, 20, 19, 19, 20, 19, 20, 20] } },
