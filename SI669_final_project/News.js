@@ -1,20 +1,47 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { Card, WingBlank } from '@ant-design/react-native';
-import {styles} from './Styles'
+import {styles} from './Styles';
 import { Linking } from 'expo';
+import firebase from 'firebase';
+import '@firebase/firestore';
 
 export class NewsScreen extends React.Component {
     constructor(props){
         super(props);
+
+
+        
+        const db = firebase.firestore();
+        this.newsRef = db.collection('news');
+        this.newsRef.get().then(queryRef => {
+            let newEntries = [];
+            queryRef.forEach(docRef => {
+                let docData = docRef.data();
+                let newEntry = {
+                    tag: docData.tag,
+                    title: docData.title,
+                    reporter: docData.reporter,
+                    img: docData.img,
+                    url: docData.url,
+                    key: docRef.id,
+                    isSelected:docData.isSelected
+                }
+                newEntries.push(newEntry);
+            })
+            this.setState({ newsList: newEntries });
+        });
+
+
+
         this.state = {
-            newsList: [
-                {key:'0',type:"News", tag:"Biden",title:"Why the Less Disruptive Health Care Option Could Be Plenty Disruptive", reporter:"Margot Sanger-Katz", img:require('./images/news_biden_2.jpg'),url:"https://www.nytimes.com/2019/12/03/upshot/public-option-medicare-for-all.html"},
-                {key:'1',type:"News", tag:"Trump",title:"200,000 People Without Insurance May Apply for Free H.I.V.-Prevention Drugs", reporter:"Donald G. McNeil Jr.", img:require('./images/news_trump_1.jpg'),url:"https://www.nytimes.com/2019/12/03/health/truvada-prep-hiv-gilead.html"},
-                {key:'2',type:"News", tag:"Yang",title:"Andrew Yang: Yes, Robots Are Stealing Your Job", reporter:"Andrew Yang", img:require('./images/news_yang_1.jpg'),url:"https://www.nytimes.com/2019/11/14/opinion/andrew-yang-jobs.html"},
-                {key:'3',type:"News", tag:"Harris",title:"Kamala Harris Drops Out of 2020 Presidential Race", reporter:"ASTEAD W. HERNDON", img:require('./images/news_harris_1.jpg'),url:"https://www.nytimes.com/2019/12/03/us/politics/kamala-harris-campaign-drops-out.html"},
+            // newsList: [
+            //     {key:'0',type:"News", tag:"Biden",title:"Why the Less Disruptive Health Care Option Could Be Plenty Disruptive", reporter:"Margot Sanger-Katz", img:require('./images/news_biden_2.jpg'),url:"https://www.nytimes.com/2019/12/03/upshot/public-option-medicare-for-all.html"},
+            //     {key:'1',type:"News", tag:"Trump",title:"200,000 People Without Insurance May Apply for Free H.I.V.-Prevention Drugs", reporter:"Donald G. McNeil Jr.", img:require('./images/news_trump_1.jpg'),url:"https://www.nytimes.com/2019/12/03/health/truvada-prep-hiv-gilead.html"},
+            //     {key:'2',type:"News", tag:"Yang",title:"Andrew Yang: Yes, Robots Are Stealing Your Job", reporter:"Andrew Yang", img:require('./images/news_yang_1.jpg'),url:"https://www.nytimes.com/2019/11/14/opinion/andrew-yang-jobs.html"},
+            //     {key:'3',type:"News", tag:"Harris",title:"Kamala Harris Drops Out of 2020 Presidential Race", reporter:"ASTEAD W. HERNDON", img:require('./images/news_harris_1.jpg'),url:"https://www.nytimes.com/2019/12/03/us/politics/kamala-harris-campaign-drops-out.html"},
               
-              ]
+            //   ]
         }
      }
 
@@ -24,6 +51,13 @@ export class NewsScreen extends React.Component {
      }
 
      render(){
+      const IMAGES = {
+        image1: require('./images/news_biden_2.jpg'), // statically analyzed
+        image2: require('./images/news_trump_1.jpg'), // statically analyzed
+        image3: require('./images/news_yang_1.jpg'), // statically analyzed
+        image4: require('./images/news_harris_1.jpg'), // statically analyzed
+        image5: require('./images/news_biden_1.jpg'), // statically analyzed
+      }
      return (
         <View style={styles.container}>
             <View style={styles.headContainer}>
@@ -33,7 +67,7 @@ export class NewsScreen extends React.Component {
                 <FlatList
                   data = {this.state.newsList}
                   renderItem = {
-                  ({item}) => {
+                  ({item, index}) => {
                     return(
                       <TouchableOpacity
                         activeOpacity={0.5}
@@ -48,7 +82,7 @@ export class NewsScreen extends React.Component {
                           />
                           <Card.Body>
                             <View style={{ height: 42 , display: "flex", flexDirection: "row"}}>
-                            <Image source= {item.img}
+                            <Image source= {IMAGES["image"+ (index+1)]}
                                   style={{ padding:10,height: 50,width: 50,resizeMode: 'stretch',flex:1}}
                             />
                             <Text style={{ marginLeft: 16 , flex: 4}}>{item.title}</Text>

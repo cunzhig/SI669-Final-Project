@@ -17,6 +17,48 @@ export class HomeScreen extends React.Component {
 
     let user = this.props.navigation.getParam('user', undefined);
 
+    const db = firebase.firestore();
+    this.discussionRef = db.collection('discussion');
+    this.discussionRef.get().then(queryRef => {
+        let newEntries = [];
+        queryRef.forEach(docRef => {
+            let docData = docRef.data();
+            let newEntry = {
+                tag: docData.tag,
+                content: docData.content,
+                up: docData.up,
+                down: docData.down,
+                authorKey: docData.authorKey,
+                authorName: docData.authorName,
+                key: docRef.id,
+                isSelected:docData.isSelected
+            }
+            newEntries.push(newEntry);
+        })
+        this.setState({ discussionList: newEntries });
+    });
+
+    this.newsRef = db.collection('news');
+    this.newsRef.get().then(queryRef => {
+        let newEntries = [];
+        queryRef.forEach(docRef => {
+            let docData = docRef.data();
+            let newEntry = {
+                tag: docData.tag,
+                title: docData.title,
+                reporter: docData.reporter,
+                img: docData.img,
+                url: docData.url,
+                key: docRef.id,
+                isSelected:docData.isSelected
+            }
+            newEntries.push(newEntry);
+        })
+        this.setState({ newsList: newEntries });
+    });
+
+
+
     this.state ={
       candidates:[
         {key:'Yang',lastname:"Yang",education:"",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
@@ -29,20 +71,20 @@ export class HomeScreen extends React.Component {
         {key:'i',lastname:"Yang",education:"um",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
         {key:'j',lastname:"Yang",education:"um",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
       ],
-      discussionList:[
-        {key:'0',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0,isSelected:false},
-        {key:'1',type:"Discussion", tag:"Trump",content:"My whole family supports Trump", up:0, down:0,isSelected:false},
-        {key:'2',type:"Discussion", tag:"Biden",content:"My whole family supports Biden", up:0, down:0,isSelected:false},
-        {key:'3',type:"Discussion", tag:"Harris",content:"My whole family supports Harris", up:0, down:0,isSelected:false},
-      ],
-      newsList: [
-        {key:'0',type:"News", tag:"Biden",title:"Why the Less Disruptive Health Care Option Could Be Plenty Disruptive", reporter:"Margot Sanger-Katz", img:require('./images/news_biden_2.jpg'),url:"https://www.nytimes.com/2019/12/03/upshot/public-option-medicare-for-all.html",isSelected:false},
-        {key:'1',type:"News", tag:"Trump",title:"200,000 People Without Insurance May Apply for Free H.I.V.-Prevention Drugs", reporter:"Donald G. McNeil Jr.", img:require('./images/news_trump_1.jpg'),url:"https://www.nytimes.com/2019/12/03/health/truvada-prep-hiv-gilead.html",isSelected:false},
-        {key:'2',type:"News", tag:"Yang",title:"Andrew Yang: Yes, Robots Are Stealing Your Job", reporter:"Andrew Yang", img:require('./images/news_yang_1.jpg'),url:"https://www.nytimes.com/2019/11/14/opinion/andrew-yang-jobs.html",isSelected:false},
-        {key:'3',type:"News", tag:"Harris",title:"Kamala Harris Drops Out of 2020 Presidential Race", reporter:"ASTEAD W. HERNDON", img:require('./images/news_harris_1.jpg'),url:"https://www.nytimes.com/2019/12/03/us/politics/kamala-harris-campaign-drops-out.html",isSelected:false},
-        {key:'4',type:"News", tag:"Harris",title:"Why Joe Biden Resonates With Blue-Collar Voters", reporter:"Hilary Swift for The New York Times", img:require('./images/news_biden_1.jpg'),isSelected:false},
+      // discussionList:[
+      //   {key:'0',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0,isSelected:false},
+      //   {key:'1',type:"Discussion", tag:"Trump",content:"My whole family supports Trump", up:0, down:0,isSelected:false},
+      //   {key:'2',type:"Discussion", tag:"Biden",content:"My whole family supports Biden", up:0, down:0,isSelected:false},
+      //   {key:'3',type:"Discussion", tag:"Harris",content:"My whole family supports Harris", up:0, down:0,isSelected:false},
+      // ],
+      // newsList: [
+      //   {key:'0',type:"News", tag:"Biden",title:"Why the Less Disruptive Health Care Option Could Be Plenty Disruptive", reporter:"Margot Sanger-Katz", img:require('./images/news_biden_2.jpg'),url:"https://www.nytimes.com/2019/12/03/upshot/public-option-medicare-for-all.html",isSelected:false},
+      //   {key:'1',type:"News", tag:"Trump",title:"200,000 People Without Insurance May Apply for Free H.I.V.-Prevention Drugs", reporter:"Donald G. McNeil Jr.", img:require('./images/news_trump_1.jpg'),url:"https://www.nytimes.com/2019/12/03/health/truvada-prep-hiv-gilead.html",isSelected:false},
+      //   {key:'2',type:"News", tag:"Yang",title:"Andrew Yang: Yes, Robots Are Stealing Your Job", reporter:"Andrew Yang", img:require('./images/news_yang_1.jpg'),url:"https://www.nytimes.com/2019/11/14/opinion/andrew-yang-jobs.html",isSelected:false},
+      //   {key:'3',type:"News", tag:"Harris",title:"Kamala Harris Drops Out of 2020 Presidential Race", reporter:"ASTEAD W. HERNDON", img:require('./images/news_harris_1.jpg'),url:"https://www.nytimes.com/2019/12/03/us/politics/kamala-harris-campaign-drops-out.html",isSelected:false},
+      //   {key:'4',type:"News", tag:"Harris",title:"Why Joe Biden Resonates With Blue-Collar Voters", reporter:"Hilary Swift for The New York Times", img:require('./images/news_biden_1.jpg'),isSelected:false},
 
-      ],
+      // ],
       user: user
     };
 
@@ -92,6 +134,13 @@ export class HomeScreen extends React.Component {
 
 
   render() {
+    const IMAGES = {
+      image1: require('./images/news_biden_2.jpg'), // statically analyzed
+      image2: require('./images/news_trump_1.jpg'), // statically analyzed
+      image3: require('./images/news_yang_1.jpg'), // statically analyzed
+      image4: require('./images/news_harris_1.jpg'), // statically analyzed
+      image5: require('./images/news_biden_1.jpg'), // statically analyzed
+    }
     return (
       <ScrollView style={styles.container}>
         <View style={styles.headContainer}>
@@ -144,7 +193,9 @@ export class HomeScreen extends React.Component {
                 <FlatList
                   data = {this.state.newsList}
                   renderItem = {
-                  ({item}) => {
+                  ({item, index}) => {
+                    console.log(item.img)
+                    let img_address = "./images/"
                     return(
                       <View>
                           {item.isSelected ?   <TouchableOpacity
@@ -160,7 +211,7 @@ export class HomeScreen extends React.Component {
                           />
                           <Card.Body>
                             <View style={{ height: 42 , display: "flex", flexDirection: "row"}}>
-                            <Image source= {item.img}
+                            <Image source= {IMAGES['image' + (index+1)]}
                                   style={{ padding:10,height: 50,width: 50,resizeMode: 'stretch',flex:1}}
                             />
                             <Text style={{ marginLeft: 16 , flex: 4}}>{item.title}</Text>
@@ -202,14 +253,13 @@ export class HomeScreen extends React.Component {
                         title={item.tag}
                         thumbStyle={{ width: 30, height: 30 }}
                         thumb= "https://static01.nyt.com/newsgraphics/2019/10/24/2020-landing-page/96aa0cc35f2fd3a9358817a7350bc6eedaa9d956/headshots/yang.png"
-                        extra={item.type}
                     />
                     <Card.Body>
                         <View style={{ height: 42 , display: "flex", flexDirection: "column"}}>
                         <Text style={{ marginLeft: 16 , flex: 4}}>{item.content}</Text>
                         </View>
                     </Card.Body>
-                    <Card.Footer content="Sam"/>
+                    <Card.Footer content={item.authorName}/>
                     </Card>
                     </TouchableOpacity>
                 </WingBlank>

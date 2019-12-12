@@ -37,7 +37,7 @@ export class KeywordScreen extends React.Component{
 
 
     handlePress = async () => {
-        fetch('http://10.0.0.178:5000/keyword/', {
+        fetch('http://35.1.150.204:5000/keyword/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -71,27 +71,6 @@ export class KeywordScreen extends React.Component{
       }
 
     render(){
-        const keywordsArray = [
-        {
-            keyword: "word1",    // the actual keyword
-            frequency: 123,      // the frequency of this keyword
-            color: randomColor(),     // the color of the circle that shows this keyword
-        },
-        {
-            keyword: "word2",    // the actual keyword
-            frequency: 123,      // the frequency of this keyword
-            color: randomColor(),     // the color of the circle that shows this keyword
-        },
-        {
-            keyword: "word3",    // the actual keyword
-            frequency: 123,      // the frequency of this keyword
-            color: randomColor(),     // the color of the circle that shows this keyword
-        },
-        {
-            keyword: "word4",    // the actual keyword
-            frequency: 123,      // the frequency of this keyword
-            color:  randomColor(),    // the color of the circle that shows this keyword
-        }];
         const { search } = this.state;
         return(
             <View>
@@ -103,7 +82,10 @@ export class KeywordScreen extends React.Component{
                 onIconPress={this.handlePress.bind(this)}
             />
             <Text>{this.state.result}</Text>
+            <View style = {styles.cloudContainer}>
+            <Cloud keywords={this.state.keywordsArray} scale={400} largestAtCenter={true} drawContainerCircle={true}/>
 
+            </View>
 
             </View>
         );

@@ -21,7 +21,7 @@ export class RankScreen extends React.Component {
     };
 
     handlePress = async () => {
-        fetch('http://127.0.0.1:5000/rank/', {
+        fetch('http://35.1.150.204:5000/rank/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
