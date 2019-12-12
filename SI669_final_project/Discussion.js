@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList, Alert, Switch } from 'react-native';
 import { Card, WingBlank, Button } from '@ant-design/react-native';
 import { styles } from './Styles'
-import { Ionicons } from '@expo/vector-icons';
 import { Icon, ButtonGroup } from 'react-native-elements';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'

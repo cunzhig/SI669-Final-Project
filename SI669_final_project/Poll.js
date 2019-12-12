@@ -3,48 +3,42 @@ import { View, Text, Image, TouchableOpacity, FlatList, Dimensions } from 'react
 import { CheckBox} from 'react-native-elements';
 import { Card, WingBlank } from '@ant-design/react-native';
 import { styles } from './Styles'
-import {
-    LineChart,
-    BarChart,
-    PieChart,
-} from 'react-native-chart-kit'
+import { LineChart } from 'react-native-chart-kit'
+import firebase from 'firebase';
+import '@firebase/firestore';
 
 export class PollScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            pollDataList: [
-                { key: 'Biden', tag: 'Biden', data: { data: [29, 33, 36, 38, 34, 32, 33, 32, 32, 32] } },
-                { key: 'Sanders', tag: 'Sanders', data: { data: [27, 25, 22, 20, 19, 19, 20, 19, 20, 20] } },
-                { key: '2', tag: 'Warren', data: { data: [7, 7, 9, 9, 13, 14, 15, 21, 20, 17] } },
-                { key: '3', tag: 'Buttigieg', data: { data: [0, 0, 8, 7, 6, 5, 8, 5, 7, 8] } },
-                { key: 'Harris', tag: 'Harris', data: { data: [10, 8, 7, 7, 10, 13, 8, 6, 6, 5] } },
-                { key: 'Yang', tag: 'Yang', data: { data: [0, 0, 2, 1, 3, 2, 2, 3, 3, 3] } },
-                { key: '6', tag: 'Booker', data: { data: [4, 4, 3, 3, 2, 2, 3, 3, 2, 2] } },
-                { key: '7', tag: 'Klobuchar', data: { data: [3, 2, 2, 1, 1, 1, 1, 1, 2, 2] } },
-                { key: '8', tag: 'Gabbard', data: { data: [1, 0, 0, 0, 0, 0, 1, 1, 2, 2] } },
-                { key: '9', tag: 'Steyer', data: { data: [0, 0, 0, 0, 0, 0, 0, 0, 1, 1] } },
-            ],
-            candidates:[
-              {key:'Yang',lastname:"Yang",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
-              {key:'Trump',lastname:"Trump",isSelected:false,img:require('./images/trump.jpeg'),url:"https://www.cnn.com/2013/07/04/us/donald-trump-fast-facts/index.html"},
-              {key:'Biden',lastname:"Biden",isSelected:false,img:require('./images/biden.png'),url:"https://www.cnn.com/2013/01/22/us/joe-biden-fast-facts/index.html"},
-              {key:'Harris',lastname:"Harris",isSelected:false,img:require('./images/harris.jpg'),url:"https://www.cnn.com/2019/01/28/us/kamala-harris-fast-facts/index.html"},
-              {key:'Sanders',lastname:"Sanders",isSelected:false,img:require('./images/Sanders.png'),url:"https://www.cnn.com/2015/05/27/us/bernie-sanders-fast-facts/index.html"},
-              {key:'Warren',lastname:"Warren",isSelected:false,img:require('./images/Warren.png'),url:"https://www.cnn.com/2015/01/09/us/elizabeth-warren-fast-facts/index.html"},
-              {key:'Buttigieg',lastname:"Buttigieg",isSelected:false,img:require('./images/Buttigieg.png'),url:"https://www.cnn.com/2019/04/19/us/pete-buttigieg-fast-facts/index.html"},
-              {key:'Booker',lastname:"Booker",isSelected:false,img:require('./images/Booker.png'),url:"https://www.cnn.com/2019/02/14/us/cory-booker-fast-facts/index.html"},
-              {key:'Klobuchar',lastname:"Klobuchar",isSelected:false,img:require('./images/Klobuchar.png'),url:"https://www.cnn.com/2019/02/18/us/amy-klobuchar-fast-facts/index.html"},
-              {key:'Gabbard',lastname:"Gabbard",isSelected:false,img:require('./images/Gabbard.png'),url:"https://www.cnn.com/2019/01/30/us/tulsi-gabbard-fast-facts/index.html"},
-            ],
-        }
+
+        const db = firebase.firestore();
+        this.candidateRef = db.collection('candidates');
+        this.candidateRef.get().then(queryRef => {
+            let newEntries = [];
+            queryRef.forEach(docRef => {
+                let docData = docRef.data();
+                let newEntry = {
+                    tag: docData.tag,
+                    url: docData.url,
+                    key: docRef.id,
+                    poll: docData.poll.split(", "),
+                    isSelected:docData.isSelected
+                }
+                newEntries.push(newEntry);
+            })
+            this.setState({ candidates: newEntries });
+        });
+
+        this.state ={
+          candidates: []
+        };
 
     }
 
     handleChoose(candidate){
      let newCandidates = [];
      for (c of this.state.candidates){
-       if (c.key == candidate.key){
+       if (c.tag == candidate.tag){
          c.isSelected = !c.isSelected;
        }
        newCandidates.push(c);
@@ -56,14 +50,14 @@ export class PollScreen extends React.Component {
     }
 
     render() {
-        const pollData = this.state.pollDataList.slice()
-        console.log(pollData)
-        let top5Poll = pollData.map(poll => ({ data: poll.data.data }));
-        console.log(top5Poll)
-        const linedata = {
-            labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
-            datasets: top5Poll
-        };
+        const Candidate_IMAGES = {
+          Yang: require('./images/yang.jpg'),
+          Trump: require('./images/trump.jpeg'),
+          Biden: require('./images/biden.png'),
+          Harris: require('./images/harris.jpg'),
+          Sanders: require('./images/Sanders.png'),
+          Warren: require('./images/Warren.png')
+        }
 
         const root = this;
         return (
@@ -86,10 +80,10 @@ export class PollScreen extends React.Component {
                             activeOpacity={0.5}
                             >
                               <Image
-                                source= {item.img}
+                                source= {Candidate_IMAGES[item.tag]}
                                 style={styles.ImageIconStyle}
                               />
-                              <Text style={styles.iconTextStyle}> {item.lastname}</Text>
+                              <Text style={styles.iconTextStyle}> {item.tag}</Text>
                           </TouchableOpacity>
                           <CheckBox
                           containerStyle={styles.labelSelectCheckBoxContainer}
@@ -103,20 +97,20 @@ export class PollScreen extends React.Component {
                     >
                     </FlatList>
                   </View>
-                  <View style={{flex: 0.7}}>
+                  <View style={{flex: 1.2}}>
                     <FlatList
                         data={this.state.candidates}
                         renderItem={
                             ({ item }) => {
                                 const pollData = {
                                     labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
-                                    datasets: [item.poll]
+                                    datasets: [{"data":item.poll}]
                                 };
                                 return (
                                     <View>
                                     {item.isSelected ?
                                     <View>
-                            <Text>{item.lastname}</Text>
+                            <Text>{item.tag}</Text>
                                     <LineChart
                                         data={pollData}
                                         width={Dimensions.get('window').width} // from react-native

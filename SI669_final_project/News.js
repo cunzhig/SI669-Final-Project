@@ -52,12 +52,20 @@ export class NewsScreen extends React.Component {
 
      render(){
       const IMAGES = {
-        image1: require('./images/news_biden_2.jpg'), // statically analyzed
-        image2: require('./images/news_trump_1.jpg'), // statically analyzed
-        image3: require('./images/news_yang_1.jpg'), // statically analyzed
-        image4: require('./images/news_harris_1.jpg'), // statically analyzed
-        image5: require('./images/news_biden_1.jpg'), // statically analyzed
+        news_biden_2: require('./images/news_biden_2.jpg'), // statically analyzed
+        news_trump_1: require('./images/news_trump_1.jpg'), // statically analyzed
+        news_yang_1: require('./images/news_yang_1.jpg'), // statically analyzed
+        news_harris_1: require('./images/news_harris_1.jpg'), // statically analyzed
+        news_biden_1: require('./images/news_biden_1.jpg'), // statically analyzed
       }
+
+      const Thumbs = {
+        Biden: require('./images/Biden_thumb.png'),
+        Trump: require('./images/Trump_thumb.jpg'),
+        Yang: require('./images/Yang_thumb.png'),
+        Harris: require('./images/Harris_thumb.jpg'),
+      }
+
      return (
         <View style={styles.container}>
             <View style={styles.headContainer}>
@@ -77,12 +85,14 @@ export class NewsScreen extends React.Component {
                           <Card.Header
                             title={item.tag}
                             thumbStyle={{ width: 30, height: 30 }}
-                            thumb={item.icon}
+                            thumb = {<Image source= {Thumbs[item.tag]}
+                            style = {{width: 30, height: 30}}
+                      />}
                             extra={item.type}
                           />
                           <Card.Body>
                             <View style={{ height: 42 , display: "flex", flexDirection: "row"}}>
-                            <Image source= {IMAGES["image"+ (index+1)]}
+                            <Image source= {IMAGES[item.img]}
                                   style={{ padding:10,height: 50,width: 50,resizeMode: 'stretch',flex:1}}
                             />
                             <Text style={{ marginLeft: 16 , flex: 4}}>{item.title}</Text>

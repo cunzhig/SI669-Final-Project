@@ -9,6 +9,9 @@ import { Card, WingBlank, Button } from '@ant-design/react-native';
 import firebase from 'firebase';
 import '@firebase/firestore';
 import {AsyncStorage} from 'react-native';
+import  UserAvatar  from 'react-native-user-avatar';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 
 export class HomeScreen extends React.Component {
 
@@ -54,43 +57,32 @@ export class HomeScreen extends React.Component {
             }
             newEntries.push(newEntry);
         })
+        console.log(newEntries);
         this.setState({ newsList: newEntries });
+    });
+
+    this.candidateRef = db.collection('candidates');
+    this.candidateRef.get().then(queryRef => {
+        let newEntries = [];
+        queryRef.forEach(docRef => {
+            let docData = docRef.data();
+            let newEntry = {
+                tag: docData.tag,
+                url: docData.url,
+                key: docRef.id,
+                isSelected:docData.isSelected
+            }
+            newEntries.push(newEntry);
+        })
+        this.setState({ candidates: newEntries });
     });
 
 
 
     this.state ={
-      candidates:[
-        {key:'Yang',lastname:"Yang",isSelected:false,img:require('./images/yang.jpg'),url:"https://www.cnn.com/2019/08/28/us/andrew-yang-fast-facts/index.html"},
-        {key:'Trump',lastname:"Trump",isSelected:false,img:require('./images/trump.jpeg'),url:"https://www.cnn.com/2013/07/04/us/donald-trump-fast-facts/index.html"},
-        {key:'Biden',lastname:"Biden",isSelected:false,img:require('./images/biden.png'),url:"https://www.cnn.com/2013/01/22/us/joe-biden-fast-facts/index.html"},
-        {key:'Harris',lastname:"Harris",isSelected:false,img:require('./images/harris.jpg'),url:"https://www.cnn.com/2019/01/28/us/kamala-harris-fast-facts/index.html"},
-        {key:'Sanders',lastname:"Sanders",isSelected:false,img:require('./images/Sanders.png'),url:"https://www.cnn.com/2015/05/27/us/bernie-sanders-fast-facts/index.html"},
-        {key:'Warren',lastname:"Warren",isSelected:false,img:require('./images/Warren.png'),url:"https://www.cnn.com/2015/01/09/us/elizabeth-warren-fast-facts/index.html"},
-        {key:'Buttigieg',lastname:"Buttigieg",isSelected:false,img:require('./images/Buttigieg.png'),url:"https://www.cnn.com/2019/04/19/us/pete-buttigieg-fast-facts/index.html"},
-        {key:'Booker',lastname:"Booker",isSelected:false,img:require('./images/Booker.png'),url:"https://www.cnn.com/2019/02/14/us/cory-booker-fast-facts/index.html"},
-        {key:'Klobuchar',lastname:"Klobuchar",isSelected:false,img:require('./images/Klobuchar.png'),url:"https://www.cnn.com/2019/02/18/us/amy-klobuchar-fast-facts/index.html"},
-        {key:'Gabbard',lastname:"Gabbard",isSelected:false,img:require('./images/Gabbard.png'),url:"https://www.cnn.com/2019/01/30/us/tulsi-gabbard-fast-facts/index.html"},
-      ],
-      // discussionList:[
-      //   {key:'0',type:"Discussion", tag:"Yang",content:"My whole family supports Yang", up:0, down:0,isSelected:false},
-      //   {key:'1',type:"Discussion", tag:"Trump",content:"My whole family supports Trump", up:0, down:0,isSelected:false},
-      //   {key:'2',type:"Discussion", tag:"Biden",content:"My whole family supports Biden", up:0, down:0,isSelected:false},
-      //   {key:'3',type:"Discussion", tag:"Harris",content:"My whole family supports Harris", up:0, down:0,isSelected:false},
-      // ],
-      // newsList: [
-      //   {key:'0',type:"News", tag:"Biden",title:"Why the Less Disruptive Health Care Option Could Be Plenty Disruptive", reporter:"Margot Sanger-Katz", img:require('./images/news_biden_2.jpg'),url:"https://www.nytimes.com/2019/12/03/upshot/public-option-medicare-for-all.html",isSelected:false},
-      //   {key:'1',type:"News", tag:"Trump",title:"200,000 People Without Insurance May Apply for Free H.I.V.-Prevention Drugs", reporter:"Donald G. McNeil Jr.", img:require('./images/news_trump_1.jpg'),url:"https://www.nytimes.com/2019/12/03/health/truvada-prep-hiv-gilead.html",isSelected:false},
-      //   {key:'2',type:"News", tag:"Yang",title:"Andrew Yang: Yes, Robots Are Stealing Your Job", reporter:"Andrew Yang", img:require('./images/news_yang_1.jpg'),url:"https://www.nytimes.com/2019/11/14/opinion/andrew-yang-jobs.html",isSelected:false},
-      //   {key:'3',type:"News", tag:"Harris",title:"Kamala Harris Drops Out of 2020 Presidential Race", reporter:"ASTEAD W. HERNDON", img:require('./images/news_harris_1.jpg'),url:"https://www.nytimes.com/2019/12/03/us/politics/kamala-harris-campaign-drops-out.html",isSelected:false},
-      //   {key:'4',type:"News", tag:"Harris",title:"Why Joe Biden Resonates With Blue-Collar Voters", reporter:"Hilary Swift for The New York Times", img:require('./images/news_biden_1.jpg'),isSelected:false},
-
-      // ],
       user: user
     };
 
-
-    console.log(this.state.user)
     AsyncStorage.setItem('userKey', user.key)
     AsyncStorage.setItem('userName', user.username)
  }
@@ -103,7 +95,7 @@ export class HomeScreen extends React.Component {
  handleToggle(candidate){
   let newCandidates = [];
   for (c of this.state.candidates){
-    if (c.key == candidate.key){
+    if (c.tag == candidate.tag){
       c.isSelected = !c.isSelected;
     }
     newCandidates.push(c);
@@ -111,7 +103,7 @@ export class HomeScreen extends React.Component {
 
   let newDiscussion = [];
   for (d of this.state.discussionList){
-    if (d.tag == candidate.key){
+    if (d.tag == candidate.tag){
       d.isSelected = !d.isSelected;
     }
     newDiscussion.push(d);
@@ -119,7 +111,7 @@ export class HomeScreen extends React.Component {
 
   let newNews = [];
   for (n of this.state.newsList){
-    if (n.tag == candidate.key){
+    if (n.tag == candidate.tag){
       n.isSelected = !n.isSelected;
     }
     newNews.push(n);
@@ -132,16 +124,131 @@ export class HomeScreen extends React.Component {
   });
  }
 
+ handleUp(item) {
+  if (this.state.userKey == item.authorKey) {
+      Alert.alert(
+          'Alert',
+          "You're not allowed to upvote for yourself",
+          [
+            {
+              text: 'OK',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+          ],
+          {cancelable: false},
+        );
+  }
+  else{
+      let newDiscussionList = [];
+      for (discussion of this.state.discussionList) {
+          if (item.key === discussion.key) {
+              if (discussion.up - discussion.upBack === 1){
+                  discussion.up -= 1
+                  newDiscussionList.push(discussion);
+              }
+              else{
+                  discussion.upBack = discussion.up
+                  discussion.up += 1
+                  newDiscussionList.push(discussion);
+              }
+              this.updateEntry(discussion);
+          } else {
+              newDiscussionList.push(discussion);
+          }
+      }
+      this.setState({
+          discussionList: newDiscussionList
+      })
+  }
+}
 
+handleDown(item) {
+  if (this.state.userKey == item.authorKey) {
+      Alert.alert(
+          'Alert',
+          "You're not allowed to downvote for yourself",
+          [
+            {
+              text: 'OK',
+              onPress: () => console.log('Cancel Pressed'),
+              style: 'cancel',
+            },
+          ],
+          {cancelable: false},
+        );
+  }
+  else{
+      let newDiscussionList = [];
+      for (discussion of this.state.discussionList) {
+          if (item.key === discussion.key) {
+              if (discussion.down - discussion.downBack === 1){
+                  discussion.down -= 1
+                  newDiscussionList.push(discussion);
+              }
+              else{
+                  discussion.downBack = discussion.down
+                  discussion.down += 1
+                  newDiscussionList.push(discussion);
+              }
+              this.updateEntry(discussion);
+          } else {
+              newDiscussionList.push(discussion);
+          }
+      }
+      this.setState({
+          discussionList: newDiscussionList
+      })
+  }
+}
+
+updateEntry(entryToUpdate) {
+  this.discussionRef.doc(entryToUpdate.key).set({
+  tag: entryToUpdate.tag,
+  content: entryToUpdate.content,
+  up: entryToUpdate.up,
+  down: entryToUpdate.down,
+  authorKey: entryToUpdate.authorKey,
+  authorName: entryToUpdate.authorName,
+  }).then(() => {
+      let newEntries = [];
+      for (entry of this.state.discussionList) {
+          if (entry.key === entryToUpdate.key) {
+              newEntries.push(entryToUpdate);
+          } else {
+              newEntries.push(entry);
+          }
+      }
+      this.setState({ discussionList: newEntries});
+  });
+}
 
   render() {
     const IMAGES = {
-      image1: require('./images/news_biden_2.jpg'), // statically analyzed
-      image2: require('./images/news_trump_1.jpg'), // statically analyzed
-      image3: require('./images/news_yang_1.jpg'), // statically analyzed
-      image4: require('./images/news_harris_1.jpg'), // statically analyzed
-      image5: require('./images/news_biden_1.jpg'), // statically analyzed
+      news_biden_2: require('./images/news_biden_2.jpg'), // statically analyzed
+      news_trump_1: require('./images/news_trump_1.jpg'), // statically analyzed
+      news_yang_1: require('./images/news_yang_1.jpg'), // statically analyzed
+      news_harris_1: require('./images/news_harris_1.jpg'), // statically analyzed
+      news_biden_1: require('./images/news_biden_1.jpg'), // statically analyzed
     }
+
+    const Thumbs = {
+      Biden: require('./images/Biden_thumb.png'),
+      Trump: require('./images/Trump_thumb.jpg'),
+      Yang: require('./images/Yang_thumb.png'),
+      Harris: require('./images/Harris_thumb.jpg'),
+    }
+
+    const Candidate_IMAGES = {
+      Yang: require('./images/yang.jpg'),
+      Trump: require('./images/trump.jpeg'),
+      Biden: require('./images/biden.png'),
+      Harris: require('./images/harris.jpg'),
+      Sanders: require('./images/Sanders.png'),
+      Warren: require('./images/Warren.png')
+    }
+
+    const root = this;
     return (
       <ScrollView style={styles.container}>
         <View style={styles.headContainer}>
@@ -166,10 +273,10 @@ export class HomeScreen extends React.Component {
                   onPress ={()=>{this.handleView(item)}}
                   >
                     <Image
-                      source= {item.img}
+                      source= {Candidate_IMAGES[item.tag]}
                       style={styles.ImageIconStyle}
                     />
-                    <Text style={styles.iconTextStyle}> {item.lastname}</Text>
+                    <Text style={styles.iconTextStyle}> {item.tag}</Text>
                 </TouchableOpacity>
                 <CheckBox
                 containerStyle={styles.labelSelectCheckBoxContainer}
@@ -195,8 +302,6 @@ export class HomeScreen extends React.Component {
                   data = {this.state.newsList}
                   renderItem = {
                   ({item, index}) => {
-                    console.log(item.img)
-                    let img_address = "./images/"
                     return(
                       <View>
                           {item.isSelected ?   <TouchableOpacity
@@ -207,12 +312,14 @@ export class HomeScreen extends React.Component {
                           <Card.Header
                             title={item.tag}
                             thumbStyle={{ width: 30, height: 30 }}
-                            thumb='https://static01.nyt.com/newsgraphics/2019/10/24/2020-landing-page/ea8f17b8d6251f28d1fcc6243cfe20146164ebe6/headshots/biden.png'
+                            thumb = {<Image source= {Thumbs[item.tag]}
+                            style = {{width: 30, height: 30}}
+                      />}
                             extra={item.type}
                           />
                           <Card.Body>
                             <View style={{ height: 42 , display: "flex", flexDirection: "row"}}>
-                            <Image source= {IMAGES['image' + (index+1)]}
+                            <Image source= {IMAGES[item.img]}
                                   style={{ padding:10,height: 50,width: 50,resizeMode: 'stretch',flex:1}}
                             />
                             <Text style={{ marginLeft: 16 , flex: 4}}>{item.title}</Text>
@@ -237,42 +344,83 @@ export class HomeScreen extends React.Component {
           <View style = {styles.sectionContent}>
             <View style={styles.SectionLine} /></View>
           <View>
-            <FlatList
-            data = {this.state.discussionList}
-            renderItem = {
-              ({item}) => {
-                return(
-                  <View>
-                    {item.isSelected == true ?
-                    <WingBlank size="lg">
-                    <TouchableOpacity
-            activeOpacity={0.5}
-            onPress ={()=>{this.handleView(item)}}
-            >
-                    <Card full>
-                    <Card.Header
-                        title={item.tag}
-                        thumbStyle={{ width: 30, height: 30 }}
-                        thumb= "https://static01.nyt.com/newsgraphics/2019/10/24/2020-landing-page/96aa0cc35f2fd3a9358817a7350bc6eedaa9d956/headshots/yang.png"
-                    />
-                    <Card.Body>
-                        <View style={{ height: 42 , display: "flex", flexDirection: "column"}}>
-                        <Text style={{ marginLeft: 16 , flex: 4}}>{item.content}</Text>
-                        </View>
-                    </Card.Body>
-                    <Card.Footer content={item.authorName}/>
-                    </Card>
-                    </TouchableOpacity>
-                </WingBlank>
-                     : null}
-
-                  </View>
-
-                );
-              }
-            }
-          >
-          </FlatList>
+          <FlatList
+                        data={this.state.discussionList}
+                        renderItem={
+                            ({ item }) => {
+                                const isAuthor = (root.state.userKey == item.authorKey)
+                                console.log(isAuthor)
+                                return (
+                                    <View>
+                                        {
+                                            item.isSelected  ?
+                                            <WingBlank size="lg">
+                                            <TouchableOpacity
+                                                activeOpacity={0.5}
+                                                onPress={() => { this.handleView(item) }}>
+                                                <Card full
+                                                    style={{ marginTop: 20, marginBottom: 5 }}>
+                                                    {/* <Card.Header
+                                                        title={item.name}
+                                                        thumbStyle={{ width: 30, height: 30 }}
+                                                        thumb="https://static01.nyt.com/newsgraphics/2019/10/24/2020-landing-page/96aa0cc35f2fd3a9358817a7350bc6eedaa9d956/headshots/yang.png"
+                                                        extra={item.tag}
+                                                    /> */}
+                                                    <Card.Body>
+                                                        <View style={{ height: 42, display: "flex", flexDirection: "row" }}>
+                                                        <UserAvatar size="24" name={item.authorName} />
+                                                            <Text style={{ fontSize: 18, marginLeft: 6, flex: 4, justifyContent: 'center', alignItems: 'center'}}>{item.content}</Text>
+                                                        </View>
+                                                    </Card.Body>
+                                                </Card>
+                                            </TouchableOpacity>
+                                            <View style={{ flexDirection: "row", alignItems: 'center', justifyContent: 'flex-start' }}>
+                                                <TouchableOpacity
+                                                    style={styles.updownButton}
+                                                    onPress={() => { this.handleUp(item) }} >
+                                                    <FontAwesomeIcon icon={faThumbsUp} size={15} color='#517fa4' />
+                                                </TouchableOpacity>
+                                                <Text style={{ flex: 1 }}>{item.up}</Text>
+                                                <TouchableOpacity
+                                                    style={styles.updownButton}
+                                                    onPress={() => { this.handleDown(item) }} >
+                                                    <FontAwesomeIcon icon={faThumbsDown} size={15} color='#517fa4' />
+                                                </TouchableOpacity>
+                                                <Text style={{ flex: 1 }}>{item.down}</Text>
+                                                {
+                                                    isAuthor ?
+                                                        <View style={{flexDirection: 'row'}}>
+                                                            <Icon
+                                                                reverse
+                                                                name='delete'
+                                                                type='AntDesign'
+                                                                color='#517fa4'
+                                                                size={10}
+                                                                onPress={() => { this.handleDelete(item) }}
+                                                            />
+                                                            <Icon
+                                                                reverse
+                                                                name='edit'
+                                                                type='AntDesign'
+                                                                color='#517fa4'
+                                                                size={10}
+                                                                onPress={() => { this.handleEdit(item) }}
+                                                            />
+                                                        </View>
+                                                        : null
+                                                }
+                                            </View>
+                                            <View>
+                                            </View>
+                                        </WingBlank>
+                                        : null 
+                                        }
+                                    </View>
+                                );
+                            }
+                        }
+                    >
+                    </FlatList>
 
             </View>
         </View>
